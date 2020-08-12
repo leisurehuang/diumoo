@@ -8,11 +8,15 @@ DEPENDENCIES:
   - SMTabBar (from `./third-party/SMTabBar`)
   - SPMediaKeyTap (from `./third-party/SPMediaKeyTap`)
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - MASShortcut
+
 EXTERNAL SOURCES:
   SMTabBar:
-    :path: ./third-party/SMTabBar
+    :path: "./third-party/SMTabBar"
   SPMediaKeyTap:
-    :path: ./third-party/SPMediaKeyTap
+    :path: "./third-party/SPMediaKeyTap"
 
 SPEC CHECKSUMS:
   MASShortcut: 9c215e8a8a78f3d01ce56da48e2730ab66b538fa
@@ -21,4 +25,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: b0edc7bd09b1788418d857997b326ea538e805c2
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.8.4

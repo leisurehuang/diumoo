@@ -9,7 +9,7 @@
 import Foundation
 import AppKit
 
-public class DMAuthHelper: NSObject {
+@objcMembers public class DMAuthHelper: NSObject {
     public static let kAuthAttributeUsername = "alias"
     public static let kAuthAttributePassword = "form_password"
     public static let kAuthAttributeCaptchaSolution = "captcha_solution"
@@ -28,18 +28,18 @@ public class DMAuthHelper: NSObject {
     
     private(set) public var username : String? = nil
     private(set) public var userUrl : String? = nil
-    private(set) public var userIcon = NSImage.init(named: NSImageNameUser)
+    private(set) public var userIcon = NSImage.init(named: NSImage.userName)
     private(set) public var isPro: Bool = false
     private(set) public var promotion_chls : Array<Dictionary<String, AnyObject>> = []
     private(set) public var recent_chls : Array<Dictionary<String, AnyObject>> = []
     private(set) public var userInfo : Dictionary<String, AnyObject> = [:]
     
     // Singleton
-    static let sharedHelper = DMAuthHelper()
+   @objc public static let sharedHelper = DMAuthHelper()
     // Disallow init directly
     private override init() {}
     
-    public class func getNewCaptchaCode () -> String {
+    public static func getNewCaptchaCode () -> String {
         let url = URL.init(string: DMAuthHelper.DOUBAN_CAPTCHA_STR)
         do {
             let code = try String.init(contentsOf: url!, encoding: String.Encoding.ascii)
@@ -49,7 +49,7 @@ public class DMAuthHelper: NSObject {
         }
     }
     
-    public func authWithDictionary(_ aDict: Dictionary<String, String>?) -> NSError? {
+   @objc public func authWithDictionary(_ aDict: Dictionary<String, String>?) -> NSError? {
         var authRequest:URLRequest? = nil
         
         if let authDict = aDict {
@@ -77,7 +77,7 @@ public class DMAuthHelper: NSObject {
     public func logout() {
         self.username = nil
         self.userUrl = nil
-        self.userIcon = NSImage.init(named: NSImageNameUser)
+        self.userIcon = NSImage.init(named: NSImage.userName)
         self.userInfo.removeAll()
         self.promotion_chls.removeAll()
         self.recent_chls.removeAll()

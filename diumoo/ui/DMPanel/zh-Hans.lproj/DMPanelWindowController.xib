@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16C32f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -110,20 +111,20 @@
                 </menuItem>
             </items>
         </menu>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="none" id="3759" customClass="DMPanel">
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="none" id="3759" customClass="DMPanel">
             <windowStyleMask key="styleMask" nonactivatingPanel="YES"/>
             <windowCollectionBehavior key="collectionBehavior" stationary="YES" ignoresCycle="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="130" y="110" width="250" height="480"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" wantsLayer="YES" id="3760">
                 <rect key="frame" x="0.0" y="0.0" width="250" height="480"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button id="3797" customClass="DMButton">
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3797" customClass="DMButton">
                         <rect key="frame" x="5" y="434" width="60" height="37"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="Gradient Button" bezelStyle="shadowlessSquare" image="play" imagePosition="only" alignment="center" state="on" inset="2" id="3815">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="play" imagePosition="overlaps" alignment="center" state="on" inset="2" id="3815">
                             <behavior key="behavior" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -131,10 +132,10 @@
                             <action selector="controlAction:" target="-2" id="3817"/>
                         </connections>
                     </button>
-                    <button tag="1" id="3798" customClass="DMButton">
+                    <button fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="3798" customClass="DMButton">
                         <rect key="frame" x="62" y="434" width="63" height="37"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="Gradient Button" bezelStyle="shadowlessSquare" image="skip" imagePosition="only" alignment="center" state="on" inset="2" id="3814">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="skip" imagePosition="overlaps" alignment="center" state="on" inset="2" id="3814">
                             <behavior key="behavior" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -142,10 +143,10 @@
                             <action selector="controlAction:" target="-2" id="3819"/>
                         </connections>
                     </button>
-                    <button tag="2" id="3799" customClass="DMButton">
+                    <button fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="3799" customClass="DMButton">
                         <rect key="frame" x="124" y="434" width="62" height="37"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="Gradient Button" bezelStyle="shadowlessSquare" image="rate" imagePosition="only" alignment="center" state="on" inset="2" id="3813">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="rate" imagePosition="overlaps" alignment="center" state="on" inset="2" id="3813">
                             <behavior key="behavior" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -153,10 +154,10 @@
                             <action selector="controlAction:" target="-2" id="3818"/>
                         </connections>
                     </button>
-                    <button tag="3" id="3800" customClass="DMButton">
+                    <button fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="3800" customClass="DMButton">
                         <rect key="frame" x="184" y="435" width="60" height="37"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="square" title="Gradient Button" bezelStyle="shadowlessSquare" image="ban" imagePosition="only" alignment="center" state="on" inset="2" id="3812">
+                        <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ban" imagePosition="overlaps" alignment="center" state="on" inset="2" id="3812">
                             <behavior key="behavior" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
@@ -164,18 +165,18 @@
                             <action selector="controlAction:" target="-2" id="3822"/>
                         </connections>
                     </button>
-                    <customView id="3801" customClass="DMCoverControlView">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3801" customClass="DMCoverControlView">
                         <rect key="frame" x="0.0" y="73" width="250" height="330"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <connections>
                             <action selector="showAlbumWindow:" target="-2" id="3816"/>
                         </connections>
                     </customView>
-                    <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" id="3882">
+                    <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="3882">
                         <rect key="frame" x="117" y="256" width="16" height="16"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </progressIndicator>
-                    <textField verticalHuggingPriority="750" id="3883">
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3883">
                         <rect key="frame" x="7" y="232" width="246" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="加载中..." id="3884">
@@ -184,7 +185,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button tag="-1" id="3866">
+                    <button fixedFrame="YES" tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3866">
                         <rect key="frame" x="218" y="74" width="32" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="share" imagePosition="only" alignment="center" state="on" imageScaling="proportionallyUpOrDown" inset="2" id="3867">
@@ -195,7 +196,7 @@
                             <action selector="popUpMenu:" target="1983" id="3875"/>
                         </connections>
                     </button>
-                    <textField hidden="YES" verticalHuggingPriority="750" id="3802">
+                    <textField hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3802">
                         <rect key="frame" x="34" y="8" width="97" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="username" id="3811">
@@ -204,7 +205,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <button tag="9" id="3900" customClass="DMButton">
+                    <button fixedFrame="YES" tag="9" translatesAutoresizingMaskIntoConstraints="NO" id="3900" customClass="DMButton">
                         <rect key="frame" x="185" y="8" width="18" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="search" imagePosition="only" alignment="center" state="on" inset="2" id="3901">
@@ -215,7 +216,7 @@
                             <action selector="controlAction:" target="-2" id="3902"/>
                         </connections>
                     </button>
-                    <slider verticalHuggingPriority="750" tag="4" id="3806">
+                    <slider verticalHuggingPriority="750" fixedFrame="YES" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="3806">
                         <rect key="frame" x="0.0" y="404" width="250" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1" doubleValue="1" tickMarkPosition="above" sliderType="linear" id="3807" customClass="DMVolumeSlideCell"/>
@@ -224,7 +225,7 @@
                             <binding destination="3736" name="value" keyPath="values.volume" id="3823"/>
                         </connections>
                     </slider>
-                    <button tag="5" id="3830">
+                    <button fixedFrame="YES" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="3830">
                         <rect key="frame" x="5" y="5" width="24" height="24"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSUser" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="3831">
@@ -235,7 +236,7 @@
                             <action selector="controlAction:" target="-2" id="3859"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" id="3824" userLabel="SubButton">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3824" userLabel="SubButton">
                         <rect key="frame" x="125" y="36" width="126" height="38"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3827" customClass="DMPopUpButtonCell">
@@ -246,7 +247,7 @@
                             <action selector="popUpMenu:" target="1983" id="3828"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" tag="1" id="3825" userLabel="MainButton">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="3825" userLabel="MainButton">
                         <rect key="frame" x="-1" y="36" width="127" height="38"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3826" customClass="DMPopUpButtonCell">
@@ -257,7 +258,7 @@
                             <action selector="popUpMenu:" target="1983" id="3829"/>
                         </connections>
                     </button>
-                    <button hidden="YES" verticalHuggingPriority="750" tag="1" id="3847" userLabel="LongMainButton">
+                    <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="3847" userLabel="LongMainButton">
                         <rect key="frame" x="-1" y="36" width="252" height="38"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3848" customClass="DMPopUpButtonCell">
@@ -268,7 +269,7 @@
                             <action selector="popUpMenu:" target="1983" id="3849"/>
                         </connections>
                     </button>
-                    <button tag="6" id="3857" customClass="DMButton">
+                    <button fixedFrame="YES" tag="6" translatesAutoresizingMaskIntoConstraints="NO" id="3857" customClass="DMButton">
                         <rect key="frame" x="225" y="8" width="18" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="exit" imagePosition="only" alignment="center" state="on" inset="2" id="3858">
@@ -279,7 +280,7 @@
                             <action selector="controlAction:" target="-2" id="3860"/>
                         </connections>
                     </button>
-                    <button tag="7" id="3863" customClass="DMButton">
+                    <button fixedFrame="YES" tag="7" translatesAutoresizingMaskIntoConstraints="NO" id="3863" customClass="DMButton">
                         <rect key="frame" x="205" y="8" width="18" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="settings" imagePosition="only" alignment="center" state="on" inset="2" id="3864">
@@ -290,7 +291,7 @@
                             <action selector="controlAction:" target="-2" id="3865"/>
                         </connections>
                     </button>
-                    <imageView hidden="YES" id="3906">
+                    <imageView hidden="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3906">
                         <rect key="frame" x="15" y="23" width="20" height="10"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="pro_icon" id="3907"/>
@@ -307,6 +308,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="3854"/>
             </connections>
+            <point key="canvasLocation" x="139" y="154"/>
         </window>
         <menu id="3868" userLabel="Share Menu">
             <items>

@@ -167,6 +167,11 @@
 		177F3CCC1630F42D00FE4780 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		178B499216A30B5D00EB642D /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		179AFA331583916200968BAD /* debugLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debugLog.h; sourceTree = "<group>"; };
+		1AC4883624E3D81200737B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DMDocumentWindow.xib; sourceTree = "<group>"; };
+		1AC4883724E3D81200737B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DMSearchPanelController.xib; sourceTree = "<group>"; };
+		1AC4883824E3D81200737B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DMPrefsPanel.xib; sourceTree = "<group>"; };
+		1AC4883924E3D81200737B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DMPanelWindowController.xib; sourceTree = "<group>"; };
+		1AC4883A24E3D81200737B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		20D2B03A41D0AEC7208214B3 /* libPods-diumoo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-diumoo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F01020F15DE998E0076D6C8 /* ban@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ban@2x.png"; sourceTree = "<group>"; };
 		3F01021215DE99940076D6C8 /* ban_mouseover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ban_mouseover.png; sourceTree = "<group>"; };
@@ -236,7 +241,6 @@
 		F5148ABE1580E58D002B3D61 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F5148AC01580E58D002B3D61 /* diumoo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "diumoo-Prefix.pch"; sourceTree = "<group>"; };
 		F5148AC21580E58D002B3D61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		F5148ACB1580E58E002B3D61 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		F5148AD21580E5F4002B3D61 /* DMAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMAppDelegate.h; sourceTree = "<group>"; };
 		F5148AD31580E5F4002B3D61 /* DMAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMAppDelegate.m; sourceTree = "<group>"; };
 		F5148AD51580E6AD002B3D61 /* DMApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMApp.h; sourceTree = "<group>"; };
@@ -284,9 +288,6 @@
 		F5729B33164F566500B9C6BA /* channels.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = channels.plist; sourceTree = "<group>"; };
 		F577112615E1096400FF6FAB /* volume_slider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "volume_slider@2x.png"; sourceTree = "<group>"; };
 		F577112815E1097500FF6FAB /* volume_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "volume_back@2x.png"; sourceTree = "<group>"; };
-		F595995D1606369100FA3C3E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DMDocumentWindow.xib; sourceTree = "<group>"; };
-		F5959961160636AC00FA3C3E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DMPrefsPanel.xib; sourceTree = "<group>"; };
-		F5959964160636BC00FA3C3E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DMPanelWindowController.xib; sourceTree = "<group>"; };
 		F5959966160637D300FA3C3E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/MainMenu.xib"; sourceTree = "<group>"; };
 		F5959967160637D300FA3C3E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		F5959968160637D300FA3C3E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Credits.rtf"; sourceTree = "<group>"; };
@@ -346,7 +347,6 @@
 		F5D3633715A1F1FF003A40B2 /* time_machine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = time_machine.png; sourceTree = "<group>"; };
 		F5D3633E15A1F3AF003A40B2 /* DMPlayRecordHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMPlayRecordHandler.h; path = DMPlayRecordHandler/DMPlayRecordHandler.h; sourceTree = "<group>"; };
 		F5D3633F15A1F3AF003A40B2 /* DMPlayRecordHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMPlayRecordHandler.m; path = DMPlayRecordHandler/DMPlayRecordHandler.m; sourceTree = "<group>"; };
-		F5D473BB163D747D00EE35B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DMSearchPanelController.xib; sourceTree = "<group>"; };
 		F5D473BE163D74A100EE35B9 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/DMSearchPanelController.xib"; sourceTree = "<group>"; };
 		F5E2D0F416005D2400389463 /* DMShortcutsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMShortcutsHandler.h; sourceTree = "<group>"; };
 		F5E2D0F516005D2400389463 /* DMShortcutsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMShortcutsHandler.m; sourceTree = "<group>"; };
@@ -924,7 +924,6 @@
 				F5148AAB1580E58D002B3D61 /* Frameworks */,
 				F5148AAC1580E58D002B3D61 /* Resources */,
 				17FE6B001584AD5900EA34EA /* ShellScript */,
-				839DD16DD090286A94C3F418 /* [CP] Embed Pods Frameworks */,
 				AC53C1DCCFC993456635CD37 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -943,9 +942,10 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DM;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 1160;
 				TargetAttributes = {
 					F5148AAD1580E58D002B3D61 = {
+						DevelopmentTeam = 25EZUPR5QA;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -958,11 +958,12 @@
 			};
 			buildConfigurationList = F5148AA81580E58D002B3D61 /* Build configuration list for PBXProject "diumoo" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				"zh-Hans",
+				Base,
 			);
 			mainGroup = F5148AA31580E58D002B3D61;
 			productRefGroup = F5148AAF1580E58D002B3D61 /* Products */;
@@ -1119,37 +1120,22 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		839DD16DD090286A94C3F418 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-diumoo/Pods-diumoo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		AC53C1DCCFC993456635CD37 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-diumoo/Pods-diumoo-resources.sh",
-				$PODS_CONFIGURATION_BUILD_DIR/MASShortcut/MASShortcut.bundle,
+				"${PODS_ROOT}/Target Support Files/Pods-diumoo/Pods-diumoo-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/MASShortcut/MASShortcut.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MASShortcut.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-diumoo/Pods-diumoo-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-diumoo/Pods-diumoo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1165,7 +1151,7 @@
 				FDFC972C1D16226A00F7D474 /* Dictionary+urlEncoding.swift in Sources */,
 				F5148ABF1580E58D002B3D61 /* main.m in Sources */,
 				F5148AD41580E5F4002B3D61 /* DMAppDelegate.m in Sources */,
-				41BD4EB61FED50700028B8BC /* DockImage.swift in Sources */,
+				41BD4EB61FED50700028B8BC /* DockImageProvider.swift in Sources */,
 				F5148AD71580E6AD002B3D61 /* DMApp.m in Sources */,
 				F5148B2E1580E904002B3D61 /* DMControlCenter.m in Sources */,
 				FDAB5DF01D1EFB0200F1201A /* DMAuthHelper.swift in Sources */,
@@ -1227,8 +1213,8 @@
 		F5148ACA1580E58E002B3D61 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F5148ACB1580E58E002B3D61 /* en */,
 				F5959966160637D300FA3C3E /* zh-Hans */,
+				1AC4883A24E3D81200737B9D /* Base */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -1236,8 +1222,8 @@
 		F595995E1606369100FA3C3E /* DMDocumentWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F595995D1606369100FA3C3E /* en */,
 				F595996A160637D300FA3C3E /* zh-Hans */,
+				1AC4883624E3D81200737B9D /* Base */,
 			);
 			name = DMDocumentWindow.xib;
 			sourceTree = "<group>";
@@ -1245,8 +1231,8 @@
 		F5959962160636AC00FA3C3E /* DMPrefsPanel.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F5959961160636AC00FA3C3E /* en */,
 				F5959969160637D300FA3C3E /* zh-Hans */,
+				1AC4883824E3D81200737B9D /* Base */,
 			);
 			name = DMPrefsPanel.xib;
 			sourceTree = "<group>";
@@ -1254,8 +1240,8 @@
 		F5959965160636BC00FA3C3E /* DMPanelWindowController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F5959964160636BC00FA3C3E /* en */,
 				F595996B160637D300FA3C3E /* zh-Hans */,
+				1AC4883924E3D81200737B9D /* Base */,
 			);
 			name = DMPanelWindowController.xib;
 			sourceTree = "<group>";
@@ -1272,8 +1258,8 @@
 		F5D473BC163D747D00EE35B9 /* DMSearchPanelController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F5D473BB163D747D00EE35B9 /* en */,
 				F5D473BE163D74A100EE35B9 /* zh-Hans */,
+				1AC4883724E3D81200737B9D /* Base */,
 			);
 			name = DMSearchPanelController.xib;
 			path = DMSearchPanel;
@@ -1287,12 +1273,20 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1330,12 +1324,20 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1370,7 +1372,8 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 25EZUPR5QA;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"/**",
@@ -1389,12 +1392,12 @@
 					"$(inherited)",
 					"-lxml2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.diumoo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtworks.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "diumoo/diumoo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1409,7 +1412,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 25EZUPR5QA;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"/**",
@@ -1428,11 +1432,11 @@
 					"$(inherited)",
 					"-lxml2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.diumoo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.thoughtworks.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "diumoo/diumoo-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

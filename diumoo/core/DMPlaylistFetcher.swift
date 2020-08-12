@@ -14,7 +14,7 @@ import AppKit
     func fetchPlaylistSucess(startSong: DMPlayableItem?) -> Void
 }
 
-public class DMPlaylistFetcher : NSObject{
+@objcMembers public class DMPlaylistFetcher : NSObject{
     // This should actually be an enum type
     // But Objective-C does not support String type enum
     // This is all we can do
@@ -132,7 +132,7 @@ public class DMPlaylistFetcher : NSObject{
             let songInfo = self.playlist[0]
             let subtype = songInfo["subtype"] as! String
             let filterAds = UserDefaults.standard.value(forKey: "filterAds") as! Int
-            if  subtype == "T" && filterAds == NSOnState {
+            if  subtype == "T" && filterAds == 1 {
                 self.playlist.remove(at: 0)
                 return self.getOnePlayableItem()
             }
@@ -172,9 +172,9 @@ public class DMPlaylistFetcher : NSObject{
                   "channel":Int(0),
                         "r": self.randomString(),
                      "from": "mainsite",
-                  "context": String("context=channel:0|musician_id:\(musicianID)")!] as [String : Any]
+                     "context": String("context=channel:0|musician_id:\(musicianID)")] as [String : Any]
         let urlString = String("\(DMPlaylistFetcher.PLAYLIST_FETCH_URL_BASE)?\(dict.urlEncodedString())")
-        self.sendRequest(forURL: urlString!) { list in
+        self.sendRequest(forURL: urlString) { list in
             if list != nil {
                 self.playlist.removeAll()
                 self.playlist.append(contentsOf: list!)
@@ -190,11 +190,11 @@ public class DMPlaylistFetcher : NSObject{
                  "channel":Int(10),
                        "r":self.randomString(),
                     "from":"mainsite",
-                 "context":String("context=channel:10|subject_id:\(songID)")!] as [String : Any]
+                    "context":String("context=channel:10|subject_id:\(songID)")] as [String : Any]
         
         let urlstring = String("\(DMPlaylistFetcher.PLAYLIST_FETCH_URL_BASE)?\(dict.urlEncodedString())")
 
-        self.sendRequest(forURL: urlstring!) { list in
+        self.sendRequest(forURL: urlstring) { list in
             if list != nil {
                 self.playlist.removeAll()
                 self.playlist.append(contentsOf: list!)
@@ -209,14 +209,14 @@ public class DMPlaylistFetcher : NSObject{
         let data = Date()
         let expire = Int(data.timeIntervalSince1970 + 1000 * 60 * 5 * 30)
         let dict = ["type" : DMPlaylistFetcher.kFetchPlaylistTypeNew,
-                  "context": String("channel:0|subject_id:\(album)")!,
+                    "context": String("channel:0|subject_id:\(album)"),
                   "channel":Int(0),
                  "app_name":"radio_ipad",
                   "version":"1",
                   "expire" : expire] as [String : Any]
         
         let urlstring = String("\(DMPlaylistFetcher.DOUBAN_ALBUM_GET_URL)?\(dict.urlEncodedString())")
-        self.sendRequest(forURL: urlstring!) { list in
+        self.sendRequest(forURL: urlstring) { list in
             if list != nil {
                 var albumSong = [] as Array<Dictionary<String, AnyObject>>
                 for song in list! {

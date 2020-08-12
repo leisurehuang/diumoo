@@ -51,7 +51,7 @@ extension NSImage {
             visiableRect.size.height = originalSize.height
         }
 
-        let ctx = NSGraphicsContext.current()
+        let ctx = NSGraphicsContext.current
         ctx?.imageInterpolation = .high
         let imageFrame = NSRect(x: margin, y: margin, width: size.width-margin*2, height: size.height-margin*2)
 
@@ -61,7 +61,7 @@ extension NSImage {
         backShape.fill()
 
         let clipPath = NSBezierPath(roundedRect: imageFrame, xRadius: radius, yRadius: radius)
-        clipPath.windingRule = .evenOddWindingRule
+        clipPath.windingRule = .evenOdd
         clipPath.addClip()
 
 

@@ -9,7 +9,7 @@
 import Foundation
 import AppKit
 
-public class DMNotificationCenter : NSObject, NSUserNotificationCenterDelegate  {
+@objcMembers public class DMNotificationCenter : NSObject, NSUserNotificationCenterDelegate  {
  
     internal let pref = UserDefaults.standard
     internal let NCCenter = NSUserNotificationCenter.default
@@ -22,7 +22,7 @@ public class DMNotificationCenter : NSObject, NSUserNotificationCenterDelegate  
     override init() {
         // Show Dock icon setting won't change without restart app, so it's safe to put it here
         // I'm not sure about how expensive this is
-        needToUpdateDock = (Int(self.pref.value(forKey: "displayAlbumCoverOnDock") as! NSNumber) == NSOnState)
+        needToUpdateDock = (Int(truncating: self.pref.value(forKey: "displayAlbumCoverOnDock") as! NSNumber) == 1)
         super.init()
         NSUserNotificationCenter.default.delegate = self
     }
@@ -32,7 +32,7 @@ public class DMNotificationCenter : NSObject, NSUserNotificationCenterDelegate  
     }
     
     func isNotificationON() -> Bool {
-        return Int(self.pref.value(forKey: "enableNotification") as! NSNumber) == NSOnState
+        return Int(truncating: self.pref.value(forKey: "enableNotification") as! NSNumber) == 1
     }
     
     public func notifyMusicPlayback(withItem item: DMPlayableItem) {
@@ -48,7 +48,7 @@ public class DMNotificationCenter : NSObject, NSUserNotificationCenterDelegate  
         
         if self.needToUpdateDock {
             let image = DockImageProvider.albumImage(from: item)
-            NSApplication.shared().applicationIconImage = image
+            NSApplication.shared.applicationIconImage = image
         }
     }
     

@@ -18,12 +18,12 @@ import AppKit
     func playableItem(_ item: DMPlayableItem, logStateChanged: Int) -> (Void)
 }
 
-public class DMPlayableItem: AVPlayerItem {
+@objcMembers public class DMPlayableItem: AVPlayerItem {
     // Interface variables
     public var cover : NSImage?
     public var isUsingDefaultFailedAlbumPhoto: Bool = false
     public var like : Bool
-    private(set) public var musicInfo : [String: AnyObject]!
+    public var musicInfo : [String: AnyObject]!
     public var playState: ItemPlayState
     public var delegate: DMPlayableItemDelegate?
     
@@ -87,7 +87,7 @@ public class DMPlayableItem: AVPlayerItem {
         }
     }
     
-    public func prepareCoverWithCallbackBlock(_ block: @escaping (NSImage?)->Void) {
+   @objc public func prepareCoverWithCallbackBlock(_ block: @escaping (NSImage?)->Void) {
         if self.cover != nil {
             block(self.cover!)
             return
@@ -99,7 +99,7 @@ public class DMPlayableItem: AVPlayerItem {
         
         let session = URLSession.shared.dataTask(with: request) { data, response, error in
             if error != nil || data == nil {
-                print("\(#function) failed to get album image with reason \(error)")
+                print("\(#function) failed to get album image with reason \(error.debugDescription)")
                 self.cover = #imageLiteral(resourceName: "albumfail")
                 self.isUsingDefaultFailedAlbumPhoto = true
             } else {
