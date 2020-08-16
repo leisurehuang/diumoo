@@ -6,15 +6,6 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#define kPauseOperationTypePass @"pass"
-#define kPauseOperationTypeSkip @"skip"
-#define kPauseOperationTypeFetchNewPlaylist @"newplaylist"
-#define kPauseOperationTypePlaySpecial @"special"
-
-#define kTimerPulseTypePlay @"kTimerPulseTypePlay"
-#define kTimerPulseTypePause @"kTimerPulseTypePause"
-#define KTimerPulseTypeVolumeChange @"kTimerPulseTypeVolumeChange"
-
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <IOKit/pwr_mgt/IOPMLib.h>
@@ -26,10 +17,8 @@
 #import "DMService.h"
 #import "DMSearchPanelController.h"
 
-#define TIMER_INTERVAL 0.1
 
-
-typedef enum{
+typedef enum {
     PAUSE_PASS = 0,
     PAUSE_PAUSE,
     PAUSE_SKIP,
@@ -38,31 +27,26 @@ typedef enum{
     PAUSE_EXIT,
 } PAUSE_OPERATION_TYPE;
 
-@interface DMControlCenter : NSObject<DMPlayableItemDelegate,DMPlaylistFetcherDeleate,DMPanelWindowDelegate,DMPlayRecordHandlerDelegate>
-{
-    NSString *channel;
-    
-    DMPlayableItem *__strong playingItem;
-    DMPlayableItem *__strong waitingItem;
-    DMPlaylistFetcher *fetcher;
-    
-    DMNotificationCenter *notificationCenter;
-    DMPanelWindowController *diumooPanel;
-    DMPlayRecordHandler *recordHandler;
+@interface DMControlCenter : NSObject <DMPlayableItemDelegate, DMPlaylistFetcherDelegate, DMPanelWindowDelegate, DMPlayRecordHandlerDelegate>
 
-    BOOL canPlaySpecial;
-}
-
-@property (strong) DMPlayableItem *playingItem;
-@property (strong) DMPlayableItem *waitingItem;
-@property DMPanelWindowController *diumooPanel;
+@property(strong, nonatomic) DMPlayableItem *playingItem;
+@property(strong, nonatomic) DMPlayableItem *waitingItem;
+@property(strong, nonatomic) DMPanelWindowController *diumooPanel;
+@property(strong, nonatomic) DMNotificationCenter *notificationCenter;
+@property(strong, nonatomic) DMPlayRecordHandler *recordHandler;
+@property(strong, nonatomic) DMPlaylistFetcher *fetcher;
+@property(assign, nonatomic) BOOL canPlaySpecial;
+@property(copy, nonatomic) NSString *channel;
 
 //self methods
--(void) fireToPlayDefault;
--(void) stopForExit;
--(void) qualityChanged;
--(void) volumeChange:(float)volume;
+- (void)fireToPlayDefault;
+
+- (void)stopForExit;
+
+- (void)qualityChanged;
+
+- (void)volumeChange:(float)volume;
 
 //methods in DMPlayableItemDelegate
-- (void)playableItem:(DMPlayableItem * )item logStateChanged:(NSInteger)logStateChanged;
+- (void)playableItem:(DMPlayableItem *)item logStateChanged:(NSInteger)logStateChanged;
 @end

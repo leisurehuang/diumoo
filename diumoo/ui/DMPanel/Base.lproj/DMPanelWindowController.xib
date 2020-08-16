@@ -58,6 +58,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="140" y="152"/>
         </menu>
         <menu id="1850" userLabel="moreChannelMenu">
             <items>

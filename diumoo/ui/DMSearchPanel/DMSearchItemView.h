@@ -9,8 +9,9 @@
 #import <Cocoa/Cocoa.h>
 
 @interface DMSearchCollectionView : NSCollectionView
-@property (nonatomic, unsafe_unretained) id target;
-- (NSManagedObject*)selectedItem;
+@property(nonatomic, unsafe_unretained) id target;
+
+- (NSManagedObject *)selectedItem;
 @end
 
 @interface DMSearchCollectionViewItem : NSCollectionViewItem
@@ -18,5 +19,5 @@
 @end
 
 @interface DMSearchItemView : NSView
-@property (readwrite) BOOL selected;
+@property(readwrite) BOOL selected;
 @end

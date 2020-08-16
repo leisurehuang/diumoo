@@ -12,6 +12,6 @@
 @interface JUInspectorBaseView : NSView {
 }
 
--(void)setupView;
+- (void)setupView;
 
 @end

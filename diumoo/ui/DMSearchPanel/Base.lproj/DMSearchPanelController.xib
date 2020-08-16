@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,18 +14,18 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
-        <window title="Search In Play Record" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="5" customClass="NSPanel">
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Search In Play Record" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="5" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" nonactivatingPanel="YES"/>
             <rect key="contentRect" x="121" y="123" width="310" height="400"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1366" height="746"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <value key="minSize" type="size" width="310" height="320"/>
             <value key="maxSize" type="size" width="310" height="9999"/>
             <view key="contentView" id="6">
                 <rect key="frame" x="0.0" y="0.0" width="310" height="400"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" id="158">
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="158">
                         <rect key="frame" x="0.0" y="-1" width="310" height="41"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="159">
@@ -32,7 +33,7 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                     </button>
-                    <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" id="7">
+                    <searchField wantsLayer="YES" focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7">
                         <rect key="frame" x="13" y="8" width="276" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" focusRingType="none" placeholderString="Music/Album/Artist" usesSingleLineMode="YES" bezelStyle="round" id="8">
@@ -49,7 +50,7 @@
                             </binding>
                         </connections>
                     </searchField>
-                    <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="194">
+                    <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="194">
                         <rect key="frame" x="0.0" y="38" width="310" height="363"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" id="Wc7-IZ-OYK">
@@ -79,12 +80,13 @@
                     </scrollView>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="139" y="147"/>
         </window>
         <view id="72" userLabel="Song View" customClass="DMSearchItemView">
             <rect key="frame" x="0.0" y="0.0" width="310" height="80"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textField verticalHuggingPriority="750" id="77">
+                <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="77">
                     <rect key="frame" x="82" y="38" width="211" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Song Title" id="78">
@@ -96,11 +98,11 @@
                         <binding destination="198" name="value" keyPath="self.representedObject.title" id="238"/>
                     </connections>
                 </textField>
-                <textField verticalHuggingPriority="750" id="79">
+                <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="79">
                     <rect key="frame" x="82" y="19" width="211" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Album" id="80">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -108,11 +110,11 @@
                         <binding destination="198" name="value" keyPath="self.representedObject.albumtitle" id="242"/>
                     </connections>
                 </textField>
-                <textField verticalHuggingPriority="750" id="117">
+                <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="117">
                     <rect key="frame" x="82" y="6" width="211" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Artist" id="118">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -120,20 +122,20 @@
                         <binding destination="198" name="value" keyPath="self.representedObject.artist" id="247"/>
                     </connections>
                 </textField>
-                <textField verticalHuggingPriority="750" id="85">
+                <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="85">
                     <rect key="frame" x="82" y="57" width="71" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Last Played: " id="86">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" id="97">
+                <textField verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="97">
                     <rect key="frame" x="150" y="56" width="143" height="14"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="date" id="98">
-                        <font key="font" metaFont="smallSystem"/>
+                        <font key="font" metaFont="message" size="11"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
@@ -141,7 +143,7 @@
                         <binding destination="198" name="value" keyPath="self.representedObject.date" id="233"/>
                     </connections>
                 </textField>
-                <imageView id="127">
+                <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="127">
                     <rect key="frame" x="9" y="8" width="65" height="65"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="128"/>
@@ -150,6 +152,7 @@
                     </connections>
                 </imageView>
             </subviews>
+            <point key="canvasLocation" x="139" y="467"/>
         </view>
         <userDefaultsController representsSharedInstance="YES" id="139"/>
         <collectionViewItem id="198" customClass="DMSearchCollectionViewItem">

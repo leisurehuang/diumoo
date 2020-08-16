@@ -9,8 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "DMApp.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     @autoreleasepool {
         [DMApp sharedApplication];
         [[NSBundle mainBundle] loadNibNamed:@"MainMenu" owner:NSApp topLevelObjects:nil];

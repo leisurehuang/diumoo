@@ -22,31 +22,30 @@
 
 @protocol JUInspectorViewHeaderDelegate
 
--(void)headerClicked:(JUInspectorViewHeader *)headerView;
+- (void)headerClicked:(JUInspectorViewHeader *)headerView;
 
 @end
 
-@interface JUInspectorViewHeader : JUInspectorBaseView
-{    
-    id<JUInspectorViewHeaderDelegate> delegate;
-    
+@interface JUInspectorViewHeader : JUInspectorBaseView {
+    id <JUInspectorViewHeaderDelegate> delegate;
+
     NSButton *disclosureTriangle;
     NSTextField *nameField;
-    
+
     NSColor *dashColor;
     NSColor *gradientStartColor;
     NSColor *gradientEndColor;
 }
 
-@property (assign, nonatomic) id<JUInspectorViewHeaderDelegate> delegate;
+@property(assign, nonatomic) id <JUInspectorViewHeaderDelegate> delegate;
 
-@property (readonly) NSButton *disclosureTriangle;
+@property(readonly) NSButton *disclosureTriangle;
 
-@property (retain, nonatomic) NSColor *dashColor;
-@property (retain, nonatomic) NSColor *gradientStartColor;
-@property (retain, nonatomic) NSColor *gradientEndColor;
+@property(retain, nonatomic) NSColor *dashColor;
+@property(retain, nonatomic) NSColor *gradientStartColor;
+@property(retain, nonatomic) NSColor *gradientEndColor;
 
-@property (assign, nonatomic) NSInteger state;
-@property (assign, nonatomic) NSString *title;
+@property(assign, nonatomic) NSInteger state;
+@property(assign, nonatomic) NSString *title;
 
 @end

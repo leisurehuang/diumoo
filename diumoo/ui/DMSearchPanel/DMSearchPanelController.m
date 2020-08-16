@@ -10,18 +10,17 @@
 #import "DMSearchItemView.h"
 #import "DMSearchPanelController.h"
 
-static DMSearchPanelController* sharedSearchPanel;
+static DMSearchPanelController *sharedSearchPanel;
 
 @interface DMSearchPanelController () {
-    IBOutlet DMSearchCollectionView* collectionview;
-    IBOutlet NSArrayController* arrayController;
+    IBOutlet DMSearchCollectionView *collectionview;
+    IBOutlet NSArrayController *arrayController;
 }
 @end
 
 @implementation DMSearchPanelController
 
-- (id)init
-{
+- (id)init {
     self = [super initWithWindowNibName:@"DMSearchPanelController"];
     if (self) {
     }
@@ -29,18 +28,16 @@ static DMSearchPanelController* sharedSearchPanel;
     return self;
 }
 
-- (void)windowDidLoad
-{
+- (void)windowDidLoad {
     [super windowDidLoad];
     [self.window setLevel:NSModalPanelWindowLevel];
     [arrayController setValue:@[
-        [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]
-    ]
+                    [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO]
+            ]
                        forKey:@"sortDescriptors"];
 }
 
-+ (DMSearchPanelController*)sharedSearchPanel
-{
++ (DMSearchPanelController *)sharedSearchPanel {
     if (sharedSearchPanel)
         return sharedSearchPanel;
     else {
@@ -49,8 +46,7 @@ static DMSearchPanelController* sharedSearchPanel;
     }
 }
 
-- (NSManagedObjectContext*)contextObject
-{
+- (NSManagedObjectContext *)contextObject {
     return [DMPlayRecordHandler sharedRecordHandler].context;
 }
 

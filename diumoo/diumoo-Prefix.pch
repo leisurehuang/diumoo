@@ -3,6 +3,8 @@
 //
 
 #ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
-    #import "debugLog.h"
+
+#import <Cocoa/Cocoa.h>
+#import "debugLog.h"
+
 #endif

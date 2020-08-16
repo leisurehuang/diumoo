@@ -20,16 +20,25 @@
 
 @interface DMService : NSObject
 
-+(NSOperationQueue*) serviceQueue;
++ (NSOperationQueue *)serviceQueue;
 
-+(void)performOnServiceQueue:(void(^)(void))block;
-+(void)performOnMainQueue:(void(^)(void))block;
-+(NSString*) cleanStartAttribute:(NSString*)start;
-+(BOOL) openDiumooLink:(NSString*)url;
-+(void) importRecordOperation;
-+(void) importRecordOperationWithFilePath:(NSURL*)fp;
-+(void) exportRecordOperation;
-+(void) showDMNotification;
-+(void) shareLinkWithDictionary:(NSDictionary*) dict callback:(void(^)(NSString* url)) block;
-+(NSString*) pathToDataFileFolder;
++ (void)performOnServiceQueue:(void (^)(void))block;
+
++ (void)performOnMainQueue:(void (^)(void))block;
+
++ (NSString *)cleanStartAttribute:(NSString *)start;
+
++ (BOOL)openDiumooLink:(NSString *)url;
+
++ (void)importRecordOperation;
+
++ (void)importRecordOperationWithFilePath:(NSURL *)fp;
+
++ (void)exportRecordOperation;
+
++ (void)showDMNotification;
+
++ (void)shareLinkWithDictionary:(NSDictionary *)dict callback:(void (^)(NSString *url))block;
+
++ (NSString *)pathToDataFileFolder;
 @end

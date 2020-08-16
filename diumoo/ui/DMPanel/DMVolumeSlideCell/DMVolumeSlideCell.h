@@ -9,8 +9,8 @@
 #import <Cocoa/Cocoa.h>
 
 @interface DMVolumeSlideCell : NSSliderCell {
-    NSImage* backImage;
-    NSImage* sliderImage;
+    NSImage *backImage;
+    NSImage *sliderImage;
     NSRect sliderRect;
     NSRect sliderDrawingRect;
     NSRect backFrame;

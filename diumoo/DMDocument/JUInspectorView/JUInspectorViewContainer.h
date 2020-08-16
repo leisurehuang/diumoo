@@ -20,15 +20,16 @@
 
 @class JUInspectorView;
 
-@interface JUInspectorViewContainer : JUInspectorBaseView
-{
+@interface JUInspectorViewContainer : JUInspectorBaseView {
     NSMutableArray *inspectorViews;
 }
 
 - (void)arrangeViews;
 
 - (void)addInspectorView:(JUInspectorView *)view expanded:(BOOL)expanded;
+
 - (void)addInspectorView:(JUInspectorView *)view atIndex:(NSInteger)index expanded:(BOOL)expanded;
+
 - (void)removeInspectorView:(JUInspectorView *)view;
 
 @end

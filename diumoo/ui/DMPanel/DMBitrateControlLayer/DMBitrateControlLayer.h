@@ -8,13 +8,12 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface DMBitrateControlLayer : CALayer
-{
-    NSArray* LayerArray;
+@interface DMBitrateControlLayer : CALayer {
+    NSArray *LayerArray;
     CGColorRef black;
     CGColorRef focus;
 }
 
--(BOOL) hitPostion:(NSPoint) point;
+- (BOOL)hitPostion:(NSPoint)point;
 
 @end

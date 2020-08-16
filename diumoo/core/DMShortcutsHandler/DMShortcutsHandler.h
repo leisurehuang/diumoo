@@ -18,6 +18,6 @@
 
 @interface DMShortcutsHandler : NSObject
 
-+(void) registrationShortcuts;
++ (void)registrationShortcuts;
 
 @end

@@ -14,25 +14,24 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface DMCoverSlide : CALayer
-{
+@interface DMCoverSlide : CALayer {
     CGPoint frontPosition;
     CGPoint titlePosition;
     CGPoint artistPosition;
     CGPoint albumPosition;
-    
-    CALayer* frontCover;
-    CALayer* frontFadeTransitionLayer;
-    
-    CATextLayer* titleLayer;
-    CATextLayer* artistLayer;
-    CATextLayer* albumLayer;
+
+    CALayer *frontCover;
+    CALayer *frontFadeTransitionLayer;
+
+    CATextLayer *titleLayer;
+    CATextLayer *artistLayer;
+    CATextLayer *albumLayer;
 }
-@property(readonly) CALayer* frontCover;
+@property(readonly) CALayer *frontCover;
 
 
--(void) setTitle:(NSString*) title artist:(NSString*)artist andAlbum:(NSString*) album;
+- (void)setTitle:(NSString *)title artist:(NSString *)artist andAlbum:(NSString *)album;
 
--(void) setFrontCoverImage:(NSImage*) image;
+- (void)setFrontCoverImage:(NSImage *)image;
 
 @end

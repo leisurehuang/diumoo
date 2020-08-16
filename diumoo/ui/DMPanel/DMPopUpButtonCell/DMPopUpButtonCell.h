@@ -8,10 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface DMPopUpButtonCell : NSButtonCell
-{
-    NSDictionary* stringAttribute;
-    NSDictionary* stringHighligtAttribute;
+@interface DMPopUpButtonCell : NSButtonCell {
+    NSDictionary *stringAttribute;
+    NSDictionary *stringHighligtAttribute;
 }
 
 @end

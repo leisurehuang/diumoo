@@ -23,148 +23,129 @@
 
 #pragma mark - Init/Dealloc
 
-- (void)setupView
-{   
+- (void)setupView {
     header = [[JUInspectorViewHeader alloc] initWithFrame:NSZeroRect];
     [header setAutoresizingMask:NSViewWidthSizable];
-    header.delegate=self;
-    
+    header.delegate = self;
+
     [self addSubview:header];
     [self setExpanded:YES];
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
     [header release];
     [body release];
-    
+
     [super dealloc];
 }
 
 #pragma mark - Properties
 
-- (void)setExpanded:(BOOL)value
-{
-    if (expanded==value)
+- (void)setExpanded:(BOOL)value {
+    if (expanded == value)
         return;
-    
-    expanded=value;
- 
+
+    expanded = value;
+
     NSRect frame;
-    
-    if (expanded)
-    {
+
+    if (expanded) {
         frame = [body bounds];
         frame.origin = [self frame].origin;
         frame.size.height += [header bounds].size.height;
-        
+
         [body setHidden:NO];
         [header setState:NSOnState];
         [container arrangeViews];
-    }
-    else
-    {
+    } else {
         frame.origin = [self frame].origin;
         frame.size = [header frame].size;
-        
+
         [body setHidden:YES];
         [header setState:NSOffState];
     }
-    
+
     [self setFrame:frame];
     [container arrangeViews];
 }
 
--(NSString *)name
-{
+- (NSString *)name {
     return [header title];
 }
 
-- (void)setName:(NSString *)value
-{
+- (void)setName:(NSString *)value {
     [header setTitle:value];
 }
 
-- (void)setBody:(NSView *)pbody
-{
+- (void)setBody:(NSView *)pbody {
     [body removeFromSuperview];
     [body release];
-    
+
     body = [pbody retain];
-    
-    if([body isFlipped])
-    {
+
+    if ([body isFlipped]) {
         NSRect bodyFrame = [body bounds];
         bodyFrame.origin.y = [header bounds].size.height + 1.0;
-        
+
         [body setFrame:bodyFrame];
-    }
-    else
-    {
+    } else {
         NSRect bodyFrame = [body bounds];
         bodyFrame.origin.y = -bodyFrame.size.height + [header bounds].size.height;
-        
+
         [body setFrame:bodyFrame];
     }
-    
+
     [self addSubview:body];
-    
+
     self.expanded = !expanded;
 }
 
 #pragma mark - NSView Overrides
 
-- (void)setFrame:(NSRect)frameRect
-{
+- (void)setFrame:(NSRect)frameRect {
     [super setFrame:frameRect];
-    
+
     NSRect bodyRect = [body frame];
     bodyRect.size.width = frameRect.size.width;
     [body setFrame:bodyRect];
 }
 
-- (BOOL)isFlipped
-{
+- (BOOL)isFlipped {
     return YES;
 }
 
-- (void)drawRect:(NSRect)dirtyRect
-{
-    if(expanded)
-    {
+- (void)drawRect:(NSRect)dirtyRect {
+    if (expanded) {
         [[header dashColor] set];
-        
+
         NSRect dashRect = [self bounds];
         dashRect.origin.x -= 1.0;
         dashRect.size.width += 2.0;
-        
+
         NSBezierPath *path = [NSBezierPath bezierPathWithRect:dashRect];
         [path setLineWidth:1.0];
         [path stroke];
     }
 }
 
-- (NSString *)description
-{
+- (NSString *)description {
     return [NSString stringWithFormat:@"JUCollectionView \"%@\", expanded: %@", self.name, expanded ? @"YES" : @"NO"];
 }
 
-- (NSComparisonResult)compare:(JUInspectorView *)otherView
-{
-    if(otherView.index > index)
+- (NSComparisonResult)compare:(JUInspectorView *)otherView {
+    if (otherView.index > index)
         return NSOrderedDescending;
-    
-    if(otherView.index < index)
+
+    if (otherView.index < index)
         return NSOrderedAscending;
-    
+
     return NSOrderedSame;
 }
 
 #pragma mark - JUInspectorViewHeaderDelegate
 
--(void)headerClicked:(JUInspectorViewHeader *)headerView
-{
-    self.expanded=!expanded;
+- (void)headerClicked:(JUInspectorViewHeader *)headerView {
+    self.expanded = !expanded;
 }
 
 

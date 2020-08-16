@@ -25,8 +25,8 @@ class DockImageProvider {
         let radius = 0.2 * edge
         let margin = 0.05 * edge
         return image.resizeImage(to: CGSize(width: edge, height: edge),
-                                 radius: radius,
-                                 margin: margin)
+                radius: radius,
+                margin: margin)
     }
 
 }
@@ -53,10 +53,10 @@ extension NSImage {
 
         let ctx = NSGraphicsContext.current
         ctx?.imageInterpolation = .high
-        let imageFrame = NSRect(x: margin, y: margin, width: size.width-margin*2, height: size.height-margin*2)
+        let imageFrame = NSRect(x: margin, y: margin, width: size.width - margin * 2, height: size.height - margin * 2)
 
-        let backShape = NSBezierPath(roundedRect: imageFrame.insetBy(dx: -margin*0.5, dy: -margin*0.5)
-            , xRadius: radius*1.1, yRadius: radius*1.1)
+        let backShape = NSBezierPath(roundedRect: imageFrame.insetBy(dx: -margin * 0.5, dy: -margin * 0.5)
+                , xRadius: radius * 1.1, yRadius: radius * 1.1)
         NSColor.white.set()
         backShape.fill()
 
@@ -66,8 +66,8 @@ extension NSImage {
 
 
         self.draw(in: imageFrame,
-                  from: visiableRect,
-                  operation: .copy, fraction: 1)
+                from: visiableRect,
+                operation: .copy, fraction: 1)
         newImage.unlockFocus()
         return newImage
     }

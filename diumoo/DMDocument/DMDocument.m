@@ -14,36 +14,31 @@
 @implementation DMDocument
 @synthesize baseSongInfo;
 
-- (id)init
-{
+- (id)init {
     if (self = [super init]) {
         // Add your subclass-specific initialization here.
     }
     return self;
 }
 
-- (void)makeWindowControllers
-{
+- (void)makeWindowControllers {
     if (sid == nil)
         return;
     if ([self.windowControllers count] == 0) {
-        DMDocumentWindowController* windowController = [[DMDocumentWindowController allocWithZone:nil] init];
+        DMDocumentWindowController *windowController = [[DMDocumentWindowController allocWithZone:nil] init];
         [self addWindowController:windowController];
     }
 }
 
-- (void)revertDocumentToSaved:(id)sender
-{
+- (void)revertDocumentToSaved:(id)sender {
     if ([self respondsToSelector:@selector(browseDocumentVersions:)]) {
         [super browseDocumentVersions:self];
-    }
-    else {
+    } else {
         [super revertDocumentToSaved:self];
     }
 }
 
-- (BOOL)revertToContentsOfURL:(NSURL*)url ofType:(NSString*)typeName error:(NSError**)outError
-{
+- (BOOL)revertToContentsOfURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError **)outError {
     BOOL success = [super revertToContentsOfURL:url ofType:typeName error:outError];
     if (success) {
         [[self windowControllers] makeObjectsPerformSelector:@selector(setupWindowForDocument:) withObject:self];
@@ -53,48 +48,42 @@
     return YES;
 }
 
-+ (BOOL)autosavesInPlace
-{
++ (BOOL)autosavesInPlace {
     return YES;
 }
 
-+ (BOOL)preservesVersions
-{
++ (BOOL)preservesVersions {
     return YES;
 }
 
-- (BOOL)hasUnautosavedChanges
-{
+- (BOOL)hasUnautosavedChanges {
     return NO;
 }
 
-- (NSData*)dataOfType:(NSString*)typeName error:(NSError**)outError
-{
-    NSData* data = [[baseSongInfo descriptionWithLocale:nil] dataUsingEncoding:NSUTF8StringEncoding];
+- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError {
+    NSData *data = [[baseSongInfo descriptionWithLocale:nil] dataUsingEncoding:NSUTF8StringEncoding];
     return data;
 }
 
-- (BOOL)readFromURL:(NSURL*)url ofType:(NSString*)type error:(NSError**)outError
-{
+- (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)type error:(NSError **)outError {
     if ([type isEqualToString:@"_private_record"]) {
-        NSString* _sid = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+        NSString *_sid = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
         if (_sid) {
-            DMPlayRecordHandler* sharedHandler = [DMPlayRecordHandler sharedRecordHandler];
-            NSManagedObject* object = [sharedHandler songWithSid:_sid];
+            DMPlayRecordHandler *sharedHandler = [DMPlayRecordHandler sharedRecordHandler];
+            NSManagedObject *object = [sharedHandler songWithSid:_sid];
             if (object) {
                 sid = [object valueForKey:@"sid"];
                 ssid = [object valueForKey:@"ssid"];
                 aid = [object valueForKey:@"aid"];
 
-                NSArray* keyarray = [[[object entity] attributesByName] allKeys];
-                NSDictionary* infodict = [object dictionaryWithValuesForKeys:keyarray];
+                NSArray *keyarray = [[[object entity] attributesByName] allKeys];
+                NSDictionary *infodict = [object dictionaryWithValuesForKeys:keyarray];
                 baseSongInfo = infodict;
                 return YES;
             }
         }
-    }
-    else if ([type isEqualToString:@"shortcut"]) {
-        NSDictionary* dict = [NSDictionary dictionaryWithContentsOfURL:url];
+    } else if ([type isEqualToString:@"shortcut"]) {
+        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfURL:url];
         if (dict) {
             sid = [dict valueForKey:@"sid"];
             ssid = [dict valueForKey:@"ssid"];
@@ -104,13 +93,12 @@
                 return YES;
             }
         }
-    }
-    else if ([type isEqualToString:@"Play Record"]) {
+    } else if ([type isEqualToString:@"Play Record"]) {
         if (NSAlertDefaultReturn
-            == NSRunAlertPanel(NSLocalizedString(@"IMPORT_PLAY_RECORD", nil),
-                   NSLocalizedString(@"IMPORT_PLAY_RECORD_DETAIL", nil),
-                   //@"您刚刚打开的一个diumoo播放记录文件，是否导入这些记录？",
-                   NSLocalizedString(@"YES", nil), NSLocalizedString(@"NO", nil), nil)) {
+                == NSRunAlertPanel(NSLocalizedString(@"IMPORT_PLAY_RECORD", nil),
+                NSLocalizedString(@"IMPORT_PLAY_RECORD_DETAIL", nil),
+                //@"您刚刚打开的一个diumoo播放记录文件，是否导入这些记录？",
+                NSLocalizedString(@"YES", nil), NSLocalizedString(@"NO", nil), nil)) {
             [DMService importRecordOperationWithFilePath:url];
         }
 

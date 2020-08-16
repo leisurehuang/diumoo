@@ -151,7 +151,7 @@ static PLTabPreferenceControl* shared;
         prefIdentifyAry = [[NSArray alloc] initWithArray:array];
         return prefIdentifyAry;
     }
-    return nil;
+    return [NSArray array];
 }
 
 - (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)atoolbar

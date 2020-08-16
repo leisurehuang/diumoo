@@ -10,18 +10,17 @@
 #import "DMCoverSlide.h"
 #import "DMBitrateControlLayer.h"
 
-@interface DMCoverControlView : NSButton
-{
-    CALayer* mainLayer;
-    DMCoverSlide* slide;
-    DMBitrateControlLayer* bitratelayer;
+@interface DMCoverControlView : NSButton {
+    CALayer *mainLayer;
+    DMCoverSlide *slide;
+    DMBitrateControlLayer *bitratelayer;
 }
-@property(readonly)DMCoverSlide* slide;
+@property(readonly) DMCoverSlide *slide;
 
--(void) setPlayingInfo:(NSString*) musictitle 
-                      :(NSString*) artist 
-                      :(NSString*) albumTitle ;
-                    
--(void) setAlbumImage:(NSImage*) albumImage;
+- (void)setPlayingInfo:(NSString *)musictitle
+        :(NSString *)artist
+        :(NSString *)albumTitle;
+
+- (void)setAlbumImage:(NSImage *)albumImage;
 
 @end

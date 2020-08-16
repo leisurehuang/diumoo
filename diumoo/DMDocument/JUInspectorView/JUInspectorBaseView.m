@@ -13,28 +13,23 @@
 
 #pragma mark - Init/Dealloc
 
-- (id)initWithFrame:(NSRect)frame
-{
-    if((self = [super initWithFrame:frame]))
-    {
+- (id)initWithFrame:(NSRect)frame {
+    if ((self = [super initWithFrame:frame])) {
         [self setupView];
     }
-    
+
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)decoder
-{
-    if((self = [super initWithCoder:decoder]))
-    {
+- (id)initWithCoder:(NSCoder *)decoder {
+    if ((self = [super initWithCoder:decoder])) {
         [self setupView];
     }
-    
+
     return self;
 }
 
-- (void)setupView
-{
+- (void)setupView {
 }
 
 @end

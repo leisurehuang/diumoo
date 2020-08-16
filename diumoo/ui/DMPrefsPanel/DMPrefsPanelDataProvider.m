@@ -15,109 +15,100 @@
 @implementation DMPrefsPanelDataProvider
 @synthesize captcha_code;
 
-- (void)showPreferences
-{
+- (void)showPreferences {
     tabcontroller = [[PLTabPreferenceControl alloc] initWithWindowNibName:@"DMPrefsPanel"];
     [tabcontroller showWindow:nil];
 }
 
-- (int)countOfPreferencePanels
-{
+- (int)countOfPreferencePanels {
     return PANEL_VIEW_COUNT;
 }
 
-- (NSString*)titleForPreferencePanelAt:(NSInteger)index
-{
+- (NSString *)titleForPreferencePanelAt:(NSInteger)index {
     switch (index) {
-    case GENERAL_PANEL_ID:
-        return NSLocalizedString(@"PREF_GENERAL", @"通用");
-        break;
-    case ACCOUNT_PANEL_ID:
-        return NSLocalizedString(@"PREF_ACCOUNT", @"账户");
-        break;
-    case KEYBINDINGS_PANNEL_ID:
-        return NSLocalizedString(@"PREF_SHORTCUTS", @"快捷键");
-        break;
-    case INFO_PANEL_ID:
-        return NSLocalizedString(@"PREF_ABOUT", @"关于");
-        break;
-    default:
-        return @"";
-        break;
+        case GENERAL_PANEL_ID:
+            return NSLocalizedString(@"PREF_GENERAL", @"通用");
+            break;
+        case ACCOUNT_PANEL_ID:
+            return NSLocalizedString(@"PREF_ACCOUNT", @"账户");
+            break;
+        case KEYBINDINGS_PANNEL_ID:
+            return NSLocalizedString(@"PREF_SHORTCUTS", @"快捷键");
+            break;
+        case INFO_PANEL_ID:
+            return NSLocalizedString(@"PREF_ABOUT", @"关于");
+            break;
+        default:
+            return @"";
+            break;
     }
 }
 
-- (NSImage*)imageForPreferencePanelAt:(NSInteger)index
-{
+- (NSImage *)imageForPreferencePanelAt:(NSInteger)index {
     switch (index) {
-    case GENERAL_PANEL_ID:
-        return [NSImage imageNamed:NSImageNamePreferencesGeneral];
-        break;
-    case ACCOUNT_PANEL_ID:
-        return [NSImage imageNamed:NSImageNameUser];
-        break;
-    case KEYBINDINGS_PANNEL_ID:
-        return [NSImage imageNamed:NSImageNameAdvanced];
-        break;
-    case INFO_PANEL_ID:
-        return [NSImage imageNamed:NSImageNameInfo];
-        break;
-    default:
-        return nil;
-        break;
+        case GENERAL_PANEL_ID:
+            return [NSImage imageNamed:NSImageNamePreferencesGeneral];
+            break;
+        case ACCOUNT_PANEL_ID:
+            return [NSImage imageNamed:NSImageNameUser];
+            break;
+        case KEYBINDINGS_PANNEL_ID:
+            return [NSImage imageNamed:NSImageNameAdvanced];
+            break;
+        case INFO_PANEL_ID:
+            return [NSImage imageNamed:NSImageNameInfo];
+            break;
+        default:
+            return nil;
+            break;
     }
 }
 
-- (NSView*)panelViewForPreferencePanelAt:(NSInteger)index
-{
+- (NSView *)panelViewForPreferencePanelAt:(NSInteger)index {
     switch (index) {
-    case GENERAL_PANEL_ID:
-        return [self generalView];
-        break;
-    case ACCOUNT_PANEL_ID:
-        return [self accountView];
-        break;
-    case KEYBINDINGS_PANNEL_ID:
-        return keybindings;
-        break;
-    case INFO_PANEL_ID:
-        return info;
-        break;
-    default:
-        return nil;
-        break;
+        case GENERAL_PANEL_ID:
+            return [self generalView];
+            break;
+        case ACCOUNT_PANEL_ID:
+            return [self accountView];
+            break;
+        case KEYBINDINGS_PANNEL_ID:
+            return keybindings;
+            break;
+        case INFO_PANEL_ID:
+            return info;
+            break;
+        default:
+            return nil;
+            break;
     }
 }
 
-- (NSString*)identifyForPreferencePanelAt:(NSInteger)index
-{
+- (NSString *)identifyForPreferencePanelAt:(NSInteger)index {
     if (index == SPACE_PANEL_ID) {
         return NSToolbarFlexibleSpaceItemIdentifier;
-    }
-    else {
+    } else {
         return [NSString stringWithFormat:@"%ld", index];
     }
 }
 
 //------------------------------界面的action------------------------------
-- (void)loginAction:(id)sender
-{
+- (void)loginAction:(id)sender {
     switch ([sender tag]) {
         {
-        case 0: // 获取验证码
-            [sender setEnabled:NO];
+            case 0: // 获取验证码
+                [sender setEnabled:NO];
             [indicator startAnimation:nil];
             captcha_code = [DMAuthHelper getNewCaptchaCode];
 
-            NSString* captcha_url = [@"https://douban.fm/misc/captcha?size=m&id=" stringByAppendingString:captcha_code];
+            NSString *captcha_url = [@"https://douban.fm/misc/captcha?size=m&id=" stringByAppendingString:captcha_code];
 
-            [NSImage AsyncLoadImageWithURLString:captcha_url andCallBackBlock:^(NSImage* image) {
+            [NSImage AsyncLoadImageWithURLString:captcha_url andCallBackBlock:^(NSImage *image) {
                 if (image == nil) {
                     [sender setImage:nil];
                     [sender setTitle:NSLocalizedString(@"FETCH_CAPTCHA_FAILED", @"获取失败，请重试")];
                     [sender setBordered:YES];
-                }
-                else {
+                } else {
                     [sender setImage:image];
                     [sender setBordered:NO];
                     [sender setTitle:@""];
@@ -129,24 +120,23 @@
         }
 
         {
-        case 1: // 登陆操作
-            [self loginOperationAction];
+            case 1: // 登陆操作
+                [self loginOperationAction];
             break;
         }
         {
-        case 2:
-            [self resetLoginForm];
+            case 2:
+                [self resetLoginForm];
             break;
         }
         {
-        default:
-            break;
+            default:
+                break;
         }
     }
 }
 
-- (void)lockLoginForm:(BOOL)lock
-{
+- (void)lockLoginForm:(BOOL)lock {
     BOOL enable = (lock == NO);
     [email setEnabled:enable];
     [password setEnabled:enable];
@@ -155,54 +145,49 @@
     [submitButton setEnabled:enable];
 }
 
-- (void)resetLoginForm
-{
+- (void)resetLoginForm {
     [email setStringValue:@""];
     [password setStringValue:@""];
     [captcha setStringValue:@""];
 }
 
-- (void)loginOperationAction
-{
-    NSString* em = [email stringValue];
-    NSString* pw = [password stringValue];
-    NSString* captcha_solution = [captcha stringValue];
+- (void)loginOperationAction {
+    NSString *em = [email stringValue];
+    NSString *pw = [password stringValue];
+    NSString *captcha_solution = [captcha stringValue];
     [errorLabel setHidden:YES];
-    
+
     if (!(em && [em length])) {
-        [errorLabel setStringValue: NSLocalizedString(@"EMAIL_MUST_NOT_BE_EMPTY", @"邮箱不能为空")];
+        [errorLabel setStringValue:NSLocalizedString(@"EMAIL_MUST_NOT_BE_EMPTY", @"邮箱不能为空")];
         [errorLabel setHidden:NO];
         return;
-    }
-    else if (!(pw && [pw length])) {
+    } else if (!(pw && [pw length])) {
         [errorLabel setStringValue:NSLocalizedString(@"PASSWORD_MUST_NOT_BE_EMPTY", @"密码不能为空")];
         [errorLabel setHidden:NO];
         return;
-    }
-    else if (!(captcha_solution && [captcha_solution length])) {
-        [errorLabel setStringValue: NSLocalizedString(@"CAPTCHA_MUST_NOT_BE_EMPTY", @"验证码不能为空")];
+    } else if (!(captcha_solution && [captcha_solution length])) {
+        [errorLabel setStringValue:NSLocalizedString(@"CAPTCHA_MUST_NOT_BE_EMPTY", @"验证码不能为空")];
         [errorLabel setHidden:NO];
         return;
-    }
-    else if (!self.captcha_code) {
-        [errorLabel setStringValue: NSLocalizedString(@"INVALID_CAPTCHA_CODE", @"未获取验证码")];
+    } else if (!self.captcha_code) {
+        [errorLabel setStringValue:NSLocalizedString(@"INVALID_CAPTCHA_CODE", @"未获取验证码")];
         [errorLabel setHidden:NO];
         return;
     }
 
     [self lockLoginForm:YES];
     [loginIndicator startAnimation:nil];
-    NSDictionary* authDict =
-        @{ [DMAuthHelper kAuthAttributeUsername] : em,
-           [DMAuthHelper kAuthAttributePassword] : pw,
-           [DMAuthHelper kAuthAttributeCaptchaSolution] : captcha_solution,
-           [DMAuthHelper kAuthAttributeCaptchaCode] : self.captcha_code,
-            @"remember" : @"on",
-            @"task" : @"sync_channel_list"
-        };
+    NSDictionary *authDict =
+            @{[DMAuthHelper kAuthAttributeUsername]: em,
+                    [DMAuthHelper kAuthAttributePassword]: pw,
+                    [DMAuthHelper kAuthAttributeCaptchaSolution]: captcha_solution,
+                    [DMAuthHelper kAuthAttributeCaptchaCode]: self.captcha_code,
+                    @"remember": @"on",
+                    @"task": @"sync_channel_list"
+            };
 
     [DMService performOnServiceQueue:^{
-        NSError* error = [[DMAuthHelper sharedHelper] authWithDictionary:authDict];
+        NSError *error = [[DMAuthHelper sharedHelper] authWithDictionary:authDict];
 
         [self lockLoginForm:NO];
         [loginIndicator stopAnimation:nil];
@@ -211,14 +196,13 @@
             [errorLabel setStringValue:NSLocalizedString(@"LOGIN_FAILED", @"登陆失败！")];
             [errorLabel setHidden:NO];
             [captcha setStringValue:@""];
-            
+
             self.captcha_code = nil;
             [captchaButton setImage:nil];
             [captchaButton setTitle:NSLocalizedString(@"点击获取验证码", @"获取失败，请重试")];
             [captchaButton setBordered:YES];
-            [loginIndicator setHidden: YES];
-        }
-        else {
+            [loginIndicator setHidden:YES];
+        } else {
             [DMService performOnMainQueue:^{
                 [tabcontroller selectPanelAtIndex:ACCOUNT_PANEL_ID];
             }];
@@ -226,33 +210,29 @@
     }];
 }
 
-- (void)logoutAction:(id)sender
-{
+- (void)logoutAction:(id)sender {
     [[DMAuthHelper sharedHelper] logout];
     [self resetLoginForm];
     [tabcontroller selectPanelAtIndex:ACCOUNT_PANEL_ID];
 }
 
-- (id)accountView
-{
+- (id)accountView {
     if ([DMAuthHelper sharedHelper].username) {
         // update account view
-        DMAuthHelper* sh = [DMAuthHelper sharedHelper];
+        DMAuthHelper *sh = [DMAuthHelper sharedHelper];
 
         [usernameTextField setStringValue:sh.username];
-        
+
         [userIconButton setImage:sh.userIcon];
 
         return account;
-    }
-    else
+    } else
         return login;
 }
 
-- (id)generalView
-{
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber* quality = [defaults valueForKey:@"musicQuality"];
+- (id)generalView {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *quality = [defaults valueForKey:@"musicQuality"];
 
     if ([quality isEqualToNumber:@64])
         [muiscQuality selectItemAtIndex:0];
@@ -265,13 +245,12 @@
 }
 
 // ----------------------- 快捷键控制 ----------------------------
-- (void)awakeFromNib
-{
-    NSDictionary* dict = [[NSBundle mainBundle] infoDictionary];
+- (void)awakeFromNib {
+    NSDictionary *dict = [[NSBundle mainBundle] infoDictionary];
     [displayName setStringValue:dict[@"CFBundleDisplayName"]];
     version.stringValue = [NSString stringWithFormat:@"%@.%@",
-                                    dict[@"CFBundleShortVersionString"],
-                                    dict[@"CFBundleVersion"]];
+                                                     dict[@"CFBundleShortVersionString"],
+                                                     dict[@"CFBundleVersion"]];
 
     playShortcut.associatedUserDefaultsKey = keyPlayShortcut;
     skipShortcut.associatedUserDefaultsKey = keySkipShortcut;
@@ -282,14 +261,13 @@
 
     if ([[[NSUserDefaults standardUserDefaults]
             valueForKey:@"usesMediaKey"] integerValue]
-        == NSOnState) {
+            == NSOnState) {
         [playShortcut setEnabled:NO];
         [skipShortcut setEnabled:NO];
     }
 }
 
-- (IBAction)donation:(id)sender
-{
+- (IBAction)donation:(id)sender {
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://diumoo.net/"]];
 }
 

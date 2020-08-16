@@ -9,40 +9,45 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface DMPopUpMenuController : NSObjectController
-{
-    IBOutlet NSButton* mainButton;
-    IBOutlet NSButton* longMainButton;
-    IBOutlet NSButton* subButton;
-    
-    IBOutlet NSMenu * mainMenu;
-    IBOutlet NSMenu * moreChannelMenu;
-    IBOutlet NSMenu* exitSpecialMenu;
-    
-    IBOutlet NSMenu* shareMenu;
-    
+@interface DMPopUpMenuController : NSObjectController {
+    IBOutlet NSButton *mainButton;
+    IBOutlet NSButton *longMainButton;
+    IBOutlet NSButton *subButton;
+
+    IBOutlet NSMenu *mainMenu;
+    IBOutlet NSMenu *moreChannelMenu;
+    IBOutlet NSMenu *exitSpecialMenu;
+
+    IBOutlet NSMenu *shareMenu;
+
 }
 
 @property(strong) IBOutlet id delegate;
 
-@property(strong) NSMenu* publicMenu;
-@property(strong) NSMenu* suggestMenu;
+@property(strong) NSMenu *publicMenu;
+@property(strong) NSMenu *suggestMenu;
 
 @property NSInteger currentChannelID;
 @property(strong) id currentChannelMenuItem;
 
 @property BOOL specialMode;
 
--(IBAction)popUpMenu:(id)sender;
--(IBAction)changeChannelAction:(id)sender;
--(void) updateChannelMenuWithSender:(id)sender;
--(void) updateChannelList;
+- (IBAction)popUpMenu:(id)sender;
 
--(void) enterSpecialPlayingModeWithTitle:(NSString *)title artist:(NSString*)artist andTypeString:(NSString*) type;
--(void) exitSepecialPlayingMode;
--(void) setPrivateChannelEnabled:(BOOL) enable;
--(void) unlockChannelMenuButton;
+- (IBAction)changeChannelAction:(id)sender;
 
--(void) invokeChannelWith:(NSInteger) cid andTitle:(NSString*) title andPlay:(BOOL)playImmediately;
+- (void)updateChannelMenuWithSender:(id)sender;
+
+- (void)updateChannelList;
+
+- (void)enterSpecialPlayingModeWithTitle:(NSString *)title artist:(NSString *)artist andTypeString:(NSString *)type;
+
+- (void)exitSepecialPlayingMode;
+
+- (void)setPrivateChannelEnabled:(BOOL)enable;
+
+- (void)unlockChannelMenuButton;
+
+- (void)invokeChannelWith:(NSInteger)cid andTitle:(NSString *)title andPlay:(BOOL)playImmediately;
 
 @end

@@ -9,11 +9,10 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface DMApp : NSApplication
-{
+@interface DMApp : NSApplication {
     NSString *openedURLString;
 }
 
-@property (copy) NSString *openedURLString;
+@property(copy) NSString *openedURLString;
 
 @end

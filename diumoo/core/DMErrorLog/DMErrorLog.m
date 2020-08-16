@@ -12,27 +12,24 @@ static DMErrorLog *sharedErrorLogger;
 
 @implementation DMErrorLog
 
-+(id) sharedErrorLog
-{
++ (id)sharedErrorLog {
     if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"enableLog"] integerValue] == NSOnState) {
         sharedErrorLogger = [[DMErrorLog alloc] init];
     } else
         sharedErrorLogger = nil;
-    
+
     return sharedErrorLogger;
 }
 
-+(void) logErrorWith:(id)object method:(SEL)methodName andError:(NSError *)error
-{
++ (void)logErrorWith:(id)object method:(SEL)methodName andError:(NSError *)error {
     if (sharedErrorLogger != nil) {
-        NSLog(@"ERROR Log: %@ %@ returns an Error = %@",object,NSStringFromSelector(methodName),error);
+        NSLog(@"ERROR Log: %@ %@ returns an Error = %@", object, NSStringFromSelector(methodName), error);
     }
 }
 
-+(void) logStateWith:(id)object fromMethod:(SEL)methodName andString:(NSString *)aString
-{
++ (void)logStateWith:(id)object fromMethod:(SEL)methodName andString:(NSString *)aString {
     if (sharedErrorLogger != nil) {
-        NSLog(@"State Log: %@ %@ has a state = %@",object,NSStringFromSelector(methodName),aString);
+        NSLog(@"State Log: %@ %@ has a state = %@", object, NSStringFromSelector(methodName), aString);
     }
 }
 

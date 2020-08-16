@@ -10,42 +10,38 @@
 
 @implementation DMButton
 
-- (id)init
-{
+- (id)init {
     if (self = [super init]) {
     }
     return self;
 }
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [[self window] setAcceptsMouseMovedEvents:YES];
     [super awakeFromNib];
 }
 
-- (void)mouseEntered:(NSEvent*)theEvent
-{
+- (void)mouseEntered:(NSEvent *)theEvent {
     if ([self isEnabled]) {
-        NSString* name = [[self image] name];
-        NSImage* mouseoverImage = [NSImage imageNamed:[name stringByAppendingString:@"_mouseover"]];
+        NSString *name = [[self image] name];
+        NSImage *mouseoverImage = [NSImage imageNamed:[name stringByAppendingString:@"_mouseover"]];
         if (mouseoverImage != nil) {
             [self setImage:mouseoverImage];
         }
     }
 }
-- (void)mouseExited:(NSEvent*)theEvent
-{
+
+- (void)mouseExited:(NSEvent *)theEvent {
     if ([self isEnabled]) {
-        NSString* name = [[self image] name];
-        NSImage* normalImage = [NSImage imageNamed:[name stringByReplacingOccurrencesOfString:@"_mouseover" withString:@""]];
+        NSString *name = [[self image] name];
+        NSImage *normalImage = [NSImage imageNamed:[name stringByReplacingOccurrencesOfString:@"_mouseover" withString:@""]];
         if (normalImage != nil) {
             [self setImage:normalImage];
         }
     }
 }
 
-- (void)updateTrackingAreas
-{
+- (void)updateTrackingAreas {
     [self removeTrackingArea:trackingArea];
 
     NSTrackingAreaOptions options = NSTrackingMouseEnteredAndExited | NSTrackingActiveInKeyWindow;

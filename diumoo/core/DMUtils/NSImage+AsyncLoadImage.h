@@ -9,5 +9,5 @@
 #import <Cocoa/Cocoa.h>
 
 @interface NSImage (AsyncLoadImage)
-+(void)AsyncLoadImageWithURLString:(NSString*) urlstring andCallBackBlock:(void(^)(NSImage*))block;
++ (void)AsyncLoadImageWithURLString:(NSString *)urlstring andCallBackBlock:(void (^)(NSImage *))block;
 @end

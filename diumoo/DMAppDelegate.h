@@ -15,13 +15,16 @@
 #import "SPMediaKeyTap.h"
 
 @interface DMAppDelegate : NSObject <NSApplicationDelegate> {
-    DMControlCenter* center;
-    SPMediaKeyTap* mediakeyTap;
+    DMControlCenter *center;
+    SPMediaKeyTap *mediakeyTap;
 }
 
 - (IBAction)showPreference:(id)sender;
+
 - (IBAction)importOrExport:(id)sender;
+
 - (IBAction)showHelp:(id)sender;
+
 - (void)keyShortcuts:(id)key;
 
 @end

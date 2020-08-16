@@ -13,24 +13,22 @@
 #import "StatusItemView.h"
 #import "diumoo-Swift.h"
 
-DMPanelWindowController* sharedWindow;
+DMPanelWindowController *sharedWindow;
 
 @implementation DMPanelWindowController
 @synthesize coreView, delegate, openURL;
 
-+ (DMPanelWindowController*)sharedWindowController
-{
++ (DMPanelWindowController *)sharedWindowController {
     if (sharedWindow == nil) {
         sharedWindow = [[DMPanelWindowController alloc] init];
     }
     return sharedWindow;
 }
 
-- (id)init
-{
+- (id)init {
     if (self = [super initWithWindowNibName:@"DMPanelWindowController"]) {
-        
-        NSString * notificationName = [DMAuthHelper AccountStateChangedNotification];
+
+        NSString *notificationName = [DMAuthHelper AccountStateChangedNotification];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(accountStateChanged:)
                                                      name:notificationName
@@ -46,22 +44,20 @@ DMPanelWindowController* sharedWindow;
     return self;
 }
 
-- (void)windowDidLoad
-{
+- (void)windowDidLoad {
     // Make the window visible on all Spaces
-    [[self window] setCollectionBehavior:NSWindowCollectionBehaviorFullScreenAuxiliary];}
+    [[self window] setCollectionBehavior:NSWindowCollectionBehaviorFullScreenAuxiliary];
+}
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
     [self.window setLevel:NSPopUpMenuWindowLevel];
     [self.window setBackgroundColor:[NSColor whiteColor]];
     [self.window setOpaque:NO];
 }
 
-- (void)accountStateChanged:(NSNotification*)n
-{
-    DMAuthHelper* helper = [DMAuthHelper sharedHelper];
+- (void)accountStateChanged:(NSNotification *)n {
+    DMAuthHelper *helper = [DMAuthHelper sharedHelper];
     [CATransaction begin];
     if (helper.username) {
         [userIconButton setImage:helper.userIcon];
@@ -72,8 +68,7 @@ DMPanelWindowController* sharedWindow;
         [banButton setEnabled:YES];
 
         [popupMenuController setPrivateChannelEnabled:YES];
-    }
-    else {
+    } else {
         [userIconButton setImage:[NSImage imageNamed:NSImageNameUser]];
         [usernameTextField setStringValue:@""];
         [usernameTextField setHidden:YES];
@@ -88,17 +83,15 @@ DMPanelWindowController* sharedWindow;
     [CATransaction commit];
 }
 
-- (void)channelChangeActionWithSender:(id)sender
-{
+- (void)channelChangeActionWithSender:(id)sender {
     NSInteger tag = [sender tag];
-    NSString* channel = [NSString stringWithFormat:@"%ld", tag];
+    NSString *channel = [NSString stringWithFormat:@"%ld", tag];
     [CATransaction begin];
     if ([self.delegate channelChangedTo:channel]) {
 
         if ([DMAuthHelper sharedHelper].username) {
             [banButton setEnabled:YES];
-        }
-        else {
+        } else {
             [banButton setEnabled:NO];
         }
 
@@ -107,66 +100,62 @@ DMPanelWindowController* sharedWindow;
     [CATransaction commit];
 }
 
-- (void)controlAction:(id)sender
-{
+- (void)controlAction:(id)sender {
     NSInteger tag = [sender tag];
     switch (tag) {
-    case 0:
-        [self.delegate playOrPause];
-        break;
-    case 1:
-        [self.delegate skip];
-        break;
-    case 2:
-        [self.delegate rateOrUnrate];
-        break;
-    case 3:
-        [self.delegate ban];
-        break;
-    case 4:
-        [self.delegate volumeChange:[sender floatValue]];
-        break;
-    case 5:
-        [PLTabPreferenceControl showPrefsAtIndex:ACCOUNT_PANEL_ID];
-        break;
-    case 6:
-        [self togglePanel:self];
-        [[NSApplication sharedApplication] terminate:nil];
-        break;
-    case 7:
-        [PLTabPreferenceControl showPrefsAtIndex:0];
-        break;
-    case 9:
-        [[DMSearchPanelController sharedSearchPanel] showWindow:nil];
-        break;
+        case 0:
+            [self.delegate playOrPause];
+            break;
+        case 1:
+            [self.delegate skip];
+            break;
+        case 2:
+            [self.delegate rateOrUnrate];
+            break;
+        case 3:
+            [self.delegate ban];
+            break;
+        case 4:
+            [self.delegate volumeChange:[sender floatValue]];
+            break;
+        case 5:
+            [PLTabPreferenceControl showPrefsAtIndex:ACCOUNT_PANEL_ID];
+            break;
+        case 6:
+            [self togglePanel:self];
+            [[NSApplication sharedApplication] terminate:nil];
+            break;
+        case 7:
+            [PLTabPreferenceControl showPrefsAtIndex:0];
+            break;
+        case 9:
+            [[DMSearchPanelController sharedSearchPanel] showWindow:nil];
+            break;
     }
 }
 
-- (void)specialAction:(id)sender
-{
+- (void)specialAction:(id)sender {
     NSInteger tag = [sender tag];
     switch (tag) {
-    case 0:
-        // 退出special
-        [self.delegate exitedSpecialMode];
-        break;
-    case -2:
-        // 打开网页
+        case 0:
+            // 退出special
+            [self.delegate exitedSpecialMode];
+            break;
+        case -2:
+            // 打开网页
         {
-            NSURL* url = [NSURL URLWithString:self.openURL];
+            NSURL *url = [NSURL URLWithString:self.openURL];
             [[NSWorkspace sharedWorkspace] openURL:url];
         }
-        break;
+            break;
     }
 }
 
-- (void)shareAction:(id)sender
-{
-    [self.delegate share:(SNS_CODE)[sender tag]];
+- (void)shareAction:(id)sender {
+    [self.delegate share:(SNS_CODE) [sender tag]];
 }
 
-- (void)unlockUIWithError:(BOOL)has_err
-{
+- (void)unlockUIWithError:(BOOL)has_err {
     [CATransaction begin];
     [loadingIndicator stopAnimation:nil];
     [loadingIndicator setHidden:YES];
@@ -175,22 +164,19 @@ DMPanelWindowController* sharedWindow;
     if (has_err) {
         [coverView setHidden:YES];
         [indicateString setStringValue:NSLocalizedString(@"NETWORK_ERROR_INDICADTE_STRING", @"发生网络错误，请尝试重启应用")];
-    }
-    else {
+    } else {
         [indicateString setHidden:YES];
     }
     [CATransaction commit];
 }
 
-- (void)setRated:(BOOL)rated
-{
+- (void)setRated:(BOOL)rated {
     if ([rateButton isEnabled]) {
         [CATransaction begin];
         if (rated) {
             [menubarController setMixed:YES];
             [rateButton setImage:[NSImage imageNamed:@"rate_red"]];
-        }
-        else {
+        } else {
             [menubarController setMixed:NO];
             [rateButton setImage:[NSImage imageNamed:@"rate"]];
         }
@@ -198,44 +184,39 @@ DMPanelWindowController* sharedWindow;
     }
 }
 
-- (void)setPlaying:(BOOL)playing
-{
+- (void)setPlaying:(BOOL)playing {
     [CATransaction begin];
     if (playing) {
         [playPauseButton setImage:[NSImage imageNamed:@"pause"]];
-    }
-    else {
+    } else {
         [playPauseButton setImage:[NSImage imageNamed:@"play"]];
     }
     [CATransaction commit];
 }
 
-- (void)setPlayingItem:(DMPlayableItem*)item
-{
+- (void)setPlayingItem:(DMPlayableItem *)item {
     if (![loadingIndicator isHidden]) {
         [self unlockUIWithError:NO];
     }
 
-    [item prepareCoverWithCallbackBlock:^(NSImage* image) {
+    [item prepareCoverWithCallbackBlock:^(NSImage *image) {
         [coverView setAlbumImage:image];
     }];
 
-    [coverView setPlayingInfo:item.musicInfo[@"title"]:item.musicInfo[@"artist"]:item.musicInfo[@"albumtitle"]];
+    [coverView setPlayingInfo:item.musicInfo[@"title"] :item.musicInfo[@"artist"] :item.musicInfo[@"albumtitle"]];
 }
 
-- (void)showAlbumWindow:(id)sender
-{
+- (void)showAlbumWindow:(id)sender {
     [NSApp activateIgnoringOtherApps:YES];
     [[DMPlayRecordHandler sharedRecordHandler] open];
 }
 
-- (NSMenuItem*)prepareCurrentMenuItem
-{
+- (NSMenuItem *)prepareCurrentMenuItem {
     if (popupMenuController.publicMenu == nil) {
         [popupMenuController updateChannelList];
     }
 
-    NSMenuItem* currentItem = popupMenuController.currentChannelMenuItem;
+    NSMenuItem *currentItem = popupMenuController.currentChannelMenuItem;
 
     [CATransaction begin];
     if ([DMAuthHelper sharedHelper].username == nil) {
@@ -251,53 +232,46 @@ DMPanelWindowController* sharedWindow;
     if (currentItem) {
         [CATransaction commit];
         return currentItem;
-    }
-    else {
+    } else {
         [CATransaction commit];
         return [popupMenuController.publicMenu
-            itemWithTag:1];
+                itemWithTag:1];
     }
 }
 
-- (void)playDefaultChannel
-{
-    NSMenuItem* currentItem = [self prepareCurrentMenuItem];
+- (void)playDefaultChannel {
+    NSMenuItem *currentItem = [self prepareCurrentMenuItem];
     [self channelChangeActionWithSender:currentItem];
 }
 
-- (NSString*)switchToDefaultChannel
-{
-    NSMenuItem* item = [self prepareCurrentMenuItem];
+- (NSString *)switchToDefaultChannel {
+    NSMenuItem *item = [self prepareCurrentMenuItem];
     [popupMenuController updateChannelMenuWithSender:item];
     if ([DMAuthHelper sharedHelper].username != nil) {
         [banButton setEnabled:YES];
-    }
-    else {
+    } else {
         [banButton setEnabled:NO];
     }
 
     return [NSString stringWithFormat:@"%ld", item.tag];
 }
 
-- (void)invokeChannelWithCid:(NSInteger)cid andTitle:(NSString*)title andPlay:(BOOL)immediately
-{
+- (void)invokeChannelWithCid:(NSInteger)cid andTitle:(NSString *)title andPlay:(BOOL)immediately {
     [popupMenuController invokeChannelWith:cid andTitle:title andPlay:immediately];
 }
 
-- (void)toggleSpecialWithDictionary:(NSDictionary*)info;
-{
+- (void)toggleSpecialWithDictionary:(NSDictionary *)info; {
     if (info) {
-        NSString* title = info[@"title"];
-        NSString* artist = info[@"artist"];
-        NSString* type = info[@"typestring"];
+        NSString *title = info[@"title"];
+        NSString *artist = info[@"artist"];
+        NSString *type = info[@"typestring"];
 
         self.openURL = info[@"album_location"];
 
         [popupMenuController enterSpecialPlayingModeWithTitle:title
                                                        artist:artist
                                                 andTypeString:type];
-    }
-    else {
+    } else {
         self.openURL = nil;
         [popupMenuController exitSepecialPlayingMode];
     }
@@ -305,10 +279,9 @@ DMPanelWindowController* sharedWindow;
 
 // ------------------------------ 弹出窗口 ----------------------------
 
-- (NSRect)statusRectForWindow:(NSWindow*)window
-{
+- (NSRect)statusRectForWindow:(NSWindow *)window {
     NSRect statusRect = NSZeroRect;
-    StatusItemView* statusItemView = nil;
+    StatusItemView *statusItemView = nil;
 
     statusItemView = menubarController.statusItemView;
 
@@ -318,41 +291,35 @@ DMPanelWindowController* sharedWindow;
     return statusRect;
 }
 
-- (BOOL)hasActivePanel
-{
+- (BOOL)hasActivePanel {
     return _hasActivePanel;
 }
 
-- (void)setHasActivePanel:(BOOL)flag
-{
+- (void)setHasActivePanel:(BOOL)flag {
     if (_hasActivePanel != flag) {
         _hasActivePanel = flag;
 
         if (_hasActivePanel) {
             [self openPanel];
-        }
-        else {
+        } else {
             [self closePanel];
         }
     }
 }
 
-- (void)windowDidResignKey:(NSNotification*)notification;
-{
+- (void)windowDidResignKey:(NSNotification *)notification; {
     if ([[self window] isVisible]) {
         [self windowWillClose:nil];
     }
 }
 
-- (void)windowWillClose:(NSNotification*)notification
-{
+- (void)windowWillClose:(NSNotification *)notification {
     self.hasActivePanel = NO;
     menubarController.hasActiveIcon = NO;
 }
 
-- (void)openPanel
-{
-    NSWindow* panel = [self window];
+- (void)openPanel {
+    NSWindow *panel = [self window];
 
     NSRect screenRect = [[panel screen] frame];
     NSRect statusRect = [self statusRectForWindow:panel];
@@ -371,26 +338,23 @@ DMPanelWindowController* sharedWindow;
     [panel makeKeyAndOrderFront:self];
 }
 
-- (void)closePanel
-{
-    NSWindow* panel = [self window];
+- (void)closePanel {
+    NSWindow *panel = [self window];
     [panel orderOut:self];
 }
 
-- (IBAction)togglePanel:(id)sender
-{
+- (IBAction)togglePanel:(id)sender {
     if (sender == nil && menubarController.hasActiveIcon)
         return;
     menubarController.hasActiveIcon = !menubarController.hasActiveIcon;
     self.hasActivePanel = menubarController.hasActiveIcon;
 }
 
-- (void)mouseScroll:(NSEvent*)event
-{
+- (void)mouseScroll:(NSEvent *)event {
     float delta = [event deltaY] / 100.0;
     float volume = [[[NSUserDefaults standardUserDefaults]
-                       valueForKey:@"volume"] floatValue]
-        + delta;
+            valueForKey:@"volume"] floatValue]
+            + delta;
     [self.delegate volumeChange:volume];
 }
 

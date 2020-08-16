@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @interface DMButton : NSButton {
-    NSTrackingArea* trackingArea;
+    NSTrackingArea *trackingArea;
 }
 
 @end
