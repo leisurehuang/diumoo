@@ -53,10 +53,8 @@
 		525D5AD01D0D936E00A39D73 /* dark-status-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 525D5ACA1D0D936E00A39D73 /* dark-status-icon@2x.png */; };
 		AB7BCA742F437B9700E53DFF /* DMNetEaseMusicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA732F437B9700E53DFF /* DMNetEaseMusicFetcher.swift */; };
 		AB7BCA772F44776A00E53DFF /* DMNetEaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA752F44776A00E53DFF /* DMNetEaseAPIClient.swift */; };
-		AB7BCA782F44776A00E53DFF /* DMNetEaseCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA762F44776A00E53DFF /* DMNetEaseCrypto.swift */; };
-		AB7BCA742F437B9700E53DFF /* DMNetEaseMusicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA732F437B9700E53DFF /* DMNetEaseMusicFetcher.swift */; };
-		AB7BCA772F44776A00E53DFF /* DMNetEaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA752F44776A00E53DFF /* DMNetEaseAPIClient.swift */; };
-		AB7BCA782F44776A00E53DFF /* DMNetEaseCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA762F44776A00E53DFF /* DMNetEaseCrypto.swift */; };
+		AB7BCA782F44776A00E53DFF /* DMEaseCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA762F44776A00E53DFF /* DMEaseCrypto.swift */; };
+		AB7BCA7A2F44815500E53DFF /* DMNetEaseCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA792F44815500E53DFF /* DMNetEaseCrypto.swift */; };
 		F501B3B715877062001C6158 /* DMCoverControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = F501B3B015877062001C6158 /* DMCoverControlView.m */; };
 		F501B3B815877062001C6158 /* DMCoverSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = F501B3B315877062001C6158 /* DMCoverSlide.m */; };
 		F501B3BD1587708F001C6158 /* DMPanelWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F501B3BB1587708F001C6158 /* DMPanelWindowController.m */; };
@@ -226,6 +224,7 @@
 		AB7BCA732F437B9700E53DFF /* DMNetEaseMusicFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNetEaseMusicFetcher.swift; sourceTree = "<group>"; };
 		AB7BCA752F44776A00E53DFF /* DMNetEaseAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNetEaseAPIClient.swift; sourceTree = "<group>"; };
 		AB7BCA762F44776A00E53DFF /* DMEaseCrypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMEaseCrypto.swift; sourceTree = "<group>"; };
+		AB7BCA792F44815500E53DFF /* DMNetEaseCrypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNetEaseCrypto.swift; sourceTree = "<group>"; };
 		BE91A78563AA81EABA8B8D0E /* Pods-diumoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diumoo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-diumoo/Pods-diumoo.debug.xcconfig"; sourceTree = "<group>"; };
 		F501B3AF15877062001C6158 /* DMCoverControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMCoverControlView.h; sourceTree = "<group>"; };
 		F501B3B015877062001C6158 /* DMCoverControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMCoverControlView.m; sourceTree = "<group>"; };
@@ -599,7 +598,8 @@
 			isa = PBXGroup;
 			children = (
 				AB7BCA752F44776A00E53DFF /* DMNetEaseAPIClient.swift */,
-				AB7BCA762F44776A00E53DFF /* DMNetEaseCrypto.swift */,
+				AB7BCA762F44776A00E53DFF /* DMEaseCrypto.swift */,
+				AB7BCA792F44815500E53DFF /* DMNetEaseCrypto.swift */,
 				AB7BCA732F437B9700E53DFF /* DMNetEaseMusicFetcher.swift */,
 				FDFC97291D16134600F7D474 /* DMPlaylistFetcher.swift */,
 				FD39574D1D1586A40029E923 /* DMPlayableItem.swift */,
@@ -1165,7 +1165,7 @@
 				F5148AD41580E5F4002B3D61 /* DMAppDelegate.m in Sources */,
 				41BD4EB61FED50700028B8BC /* DockImageProvider.swift in Sources */,
 				F5148AD71580E6AD002B3D61 /* DMApp.m in Sources */,
-			F5148B2E1580E904002B3D61 /* DMControlCenter.m in Sources */,
+				F5148B2E1580E904002B3D61 /* DMControlCenter.m in Sources */,
 				FDAB5DF01D1EFB0200F1201A /* DMAuthHelper.swift in Sources */,
 				F5148B311580E904002B3D61 /* NSDictionary+UrlEncoding.m in Sources */,
 				F501B3B715877062001C6158 /* DMCoverControlView.m in Sources */,
@@ -1181,16 +1181,17 @@
 				AB7BCA742F437B9700E53DFF /* DMNetEaseMusicFetcher.swift in Sources */,
 				F5D3632115A1F0EF003A40B2 /* DMDocumentWindowController.m in Sources */,
 				F5D3632315A1F0EF003A40B2 /* JUInspectorBaseView.m in Sources */,
-			F5D3632415A1F0EF003A40B2 /* JUInspectorView.m in Sources */,
-			F5D3632515A1F0EF003A40B2 /* JUInspectorViewContainer.m in Sources */,
+				F5D3632415A1F0EF003A40B2 /* JUInspectorView.m in Sources */,
+				F5D3632515A1F0EF003A40B2 /* JUInspectorViewContainer.m in Sources */,
 				F5D3632615A1F0EF003A40B2 /* JUInspectorViewHeader.m in Sources */,
+				AB7BCA7A2F44815500E53DFF /* DMNetEaseCrypto.swift in Sources */,
 				F5D3634015A1F3AF003A40B2 /* DMPlayRecordHandler.m in Sources */,
 				F5FC4DA515A31F8E00197D1A /* DMPlayRecordModel.xcdatamodeld in Sources */,
 				F515C16015B6F07500210826 /* MenubarController.m in Sources */,
 				F515C16115B6F07500210826 /* StatusItemView.m in Sources */,
 				F566F60E15C6E4A200FC7143 /* NSImage+AsyncLoadImage.m in Sources */,
 				AB7BCA772F44776A00E53DFF /* DMNetEaseAPIClient.swift in Sources */,
-				AB7BCA782F44776A00E53DFF /* DMNetEaseCrypto.swift in Sources */,
+				AB7BCA782F44776A00E53DFF /* DMEaseCrypto.swift in Sources */,
 				F53C78DE15CC0AA000201C65 /* DMService.m in Sources */,
 				F53C78EB15CC0D0C00201C65 /* NSData+AESCrypt.m in Sources */,
 				F53C78EC15CC0D0C00201C65 /* NSData+Base64.m in Sources */,
