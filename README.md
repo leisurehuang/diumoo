@@ -6,7 +6,7 @@
 
 > A lightweight, elegant macOS menu bar music player powered by NetEase Cloud Music.
 
-![Diumoo Screenshot](resources/screenshot.png)
+![Diumoo Screenshot](screenshot.png)
 
 ## ✨ Features
 
