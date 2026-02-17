@@ -9,7 +9,7 @@ DEPENDENCIES:
   - SPMediaKeyTap (from `./third-party/SPMediaKeyTap`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - MASShortcut
 
 EXTERNAL SOURCES:
@@ -23,6 +23,6 @@ SPEC CHECKSUMS:
   SMTabBar: 11521459249d577ef278442319c0ac4d90628d2e
   SPMediaKeyTap: ddb3cf0f3485bf2ac5a31c1b5ce9fc396115be7f
 
-PODFILE CHECKSUM: b0edc7bd09b1788418d857997b326ea538e805c2
+PODFILE CHECKSUM: 035731669c22f73cb4ef8393e27f586d117f93f3
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.16.2

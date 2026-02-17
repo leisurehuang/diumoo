@@ -1,4 +1,4 @@
-source 'https://github.com/Cocoapods/Specs.git'
+#source 'https://github.com/Cocoapods/Specs.git'
 
 platform :osx, '10.10'
 inhibit_all_warnings!

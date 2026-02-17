@@ -74,6 +74,11 @@
                                                  selector:@selector(playSpecialNotification:)
                                                      name:@"playspecial"
                                                    object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(itemDidFinishPlaying:)
+                                                     name:AVPlayerItemDidPlayToEndTimeNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -226,6 +231,14 @@
     }
     // 歌曲播放结束时，无论如何都要解除lock
     pauseType = PAUSE_PASS;
+}
+
+- (void)itemDidFinishPlaying:(NSNotification *)notification {
+    AVPlayerItem *item = (AVPlayerItem *)notification.object;
+    if (item == self.playingItem) {
+        NSLog(@"Song finished, skipping to next");
+        [self skip];
+    }
 }
 
 - (void)playableItem:(DMPlayableItem *_Nonnull)item logStateChanged:(NSInteger)state {

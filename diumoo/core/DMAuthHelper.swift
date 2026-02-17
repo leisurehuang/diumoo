@@ -52,28 +52,9 @@ import AppKit
     }
 
     @objc public func authWithDictionary(_ aDict: Dictionary<String, String>?) -> NSError? {
-        var authRequest: URLRequest? = nil
-
-        if let authDict = aDict {
-            let authStringBody = self.encodeAuthDictionary(authDict)
-            let requestBody = authStringBody.data(using: String.Encoding.utf8)
-            authRequest = URLRequest.init(url: URL.init(string: DMAuthHelper.AUTH_URL_STRING)!)
-            authRequest?.httpMethod = "POST"
-            authRequest?.httpBody = requestBody
-        } else {
-            authRequest = URLRequest.init(url: URL.init(string: DMAuthHelper.DOUBAN_USER_INFO)!)
-            authRequest?.httpMethod = "GET"
-        }
-
-        var response: URLResponse?
-
-        do {
-            let urlData = try NSURLConnection.sendSynchronousRequest(authRequest!, returning: &response)
-            return self.handleConnectionResponse(response!, Data: urlData)
-        } catch {
-            print("\(#function) caught: \(error)")
-            return NSError.init(domain: "douban.fm", code: 0, userInfo: nil)
-        }
+        // Douban FM API is deprecated - skip authentication
+        print("\(#function) Douban FM authentication is disabled - API is deprecated")
+        return nil
     }
 
     public func logout() {

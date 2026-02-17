@@ -9,6 +9,28 @@
 import Foundation
 import AppKit
 
+// MARK: - Dictionary Extensions for URL Encoding
+
+extension Dictionary where Key == String, Value == Any {
+    func urlEncodedString() -> String {
+        var parts: [String] = []
+        for (key, value) in self {
+            let encodedKey = key.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? key
+            let encodedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "\(value)"
+            parts.append("\(encodedKey)=\(encodedValue)")
+        }
+        return parts.joined(separator: "&")
+    }
+
+    func hString() -> String {
+        var parts: [String] = []
+        for (key, value) in self {
+            parts.append("\(key):\(value)")
+        }
+        return parts.joined(separator: "|")
+    }
+}
+
 @objc public protocol DMPlaylistFetcherDelegate {
     func fetchPlaylist(WithDictionary dict: Dictionary<String, AnyObject>, startAttribute attribute: String, errorThreshould errCount: NSInteger) -> Void
     func fetchPlaylistSuccess(startSong: DMPlayableItem?) -> Void
@@ -34,8 +56,13 @@ import AppKit
     public var delegate: DMPlaylistFetcherDelegate?
 
     internal var playlist: Array<Dictionary<String, AnyObject>> = []
-    internal var playedSongs: Dictionary<String, String> = [:]
+    internal var playedSongs: Dictionary<String, Any> = [:]
     internal var searchResults: NSOrderedSet = []
+
+    internal var netEaseFetcher: DMNetEaseMusicFetcher?
+    internal lazy var netEaseFetcherInstance: DMNetEaseMusicFetcher = {
+        return DMNetEaseMusicFetcher()
+    }()
 
     internal func randomString() -> String {
         let rand1: UInt32 = arc4random();
@@ -62,69 +89,43 @@ import AppKit
         let pref = UserDefaults.standard
         let quality = pref.value(forKey: "musicQuality") as! NSNumber
 
-        let fetchDictionary: Dictionary<String, AnyObject> = [
-            "type": type as AnyObject,
-            "channel": Int(channel) as AnyObject,
-            "sid": ((sid != nil) ? sid : "") as AnyObject,
-            "h": self.playedSongs.hString() as AnyObject,
-            "r": self.randomString() as AnyObject,
-            "from": "mainsite" as AnyObject,
-            "kbps": quality]
+        let fetchDictionary: [String: Any] = [
+            "type": type,
+            "channel": Int(channel),
+            "sid": ((sid != nil) ? sid : ""),
+            "h": (self.playedSongs as [String: Any]).hString(),
+            "r": self.randomString(),
+            "from": "mainsite",
+            "kbps": quality
+        ]
         self.fetchPlaylist(withDictionary: fetchDictionary, startAttribute: attribute, errCount: 0)
     }
 
-    public func fetchPlaylist(withDictionary dict: Dictionary<String, AnyObject>, startAttribute attribute: String?, errCount: Int) {
-        let urlString = DMPlaylistFetcher.PLAYLIST_FETCH_URL_BASE.appendingFormat("?%@", dict.urlEncodedString())
-        let urlRequest = URLRequest.init(url: URL.init(string: urlString)!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 20.0)
-
-        // Processing cookie
+    public func fetchPlaylist(withDictionary dict: [String: Any], startAttribute attribute: String?, errCount: Int) {
         let validAttr = attribute ?? ""
-        let cookie = HTTPCookie.init(properties: [HTTPCookiePropertyKey.domain: "douban.fm",
-                                                  HTTPCookiePropertyKey.name: "start",
-                                                  HTTPCookiePropertyKey.value: validAttr,
-                                                  HTTPCookiePropertyKey.discard: true,
-                                                  HTTPCookiePropertyKey.path: "/"])
 
-        HTTPCookieStorage.shared.setCookie(cookie!)
+        let channelId = String(describing: dict["channel"] ?? "0")
 
-        let session = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            if error != nil {
-                self.delegate?.fetchPlaylist(WithDictionary: dict, startAttribute: validAttr, errorThreshould: errCount + 1)
-            } else {
-                do {
-                    let jResponse = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)
+        if self.netEaseFetcher == nil {
+            self.netEaseFetcher = self.netEaseFetcherInstance
+        }
 
-                    let strRet = jResponse as? String
-                    if strRet == "ok" {
-                        self.delegate?.fetchPlaylistSuccess(startSong: nil)
-                    } else {
-                        let jDict = jResponse as! Dictionary<String, AnyObject>
-                        let jrVal = jDict["r"] as! Int
+        self.netEaseFetcher?.fetchPlaylist(fromChannel: channelId) { [weak self] success in
+            guard let self = self else { return }
 
-                        // Something's wrong
-                        if jrVal != 0 {
-                            self.delegate?.fetchPlaylist(WithDictionary: dict, startAttribute: validAttr, errorThreshould: errCount + 1)
-                        } else {
-                            let jList = jDict["song"] as? Array<Dictionary<String, AnyObject>>
-                            if attribute != nil {
-                                self.playlist = jList!
-                                let aSong = DMPlayableItem.init(WithDict: self.playlist[0])
-                                self.delegate?.fetchPlaylistSuccess(startSong: aSong)
-                                self.playlist.remove(at: 0)
-                            } else {
-                                if let list = jList {
-                                    self.playlist.append(contentsOf: list)
-                                }
-                                self.delegate?.fetchPlaylistSuccess(startSong: nil)
-                            }
-                        }
-                    }
-                } catch _ {
-                    self.delegate?.fetchPlaylist(WithDictionary: dict, startAttribute: validAttr, errorThreshould: errCount + 1)
+            if success, let fetcher = self.netEaseFetcher {
+                if attribute != nil && fetcher.playlist.count > 0 {
+                    let aSong = DMPlayableItem.init(WithDict: fetcher.playlist[0])
+                    self.playlist = Array(fetcher.playlist.dropFirst())
+                    self.delegate?.fetchPlaylistSuccess(startSong: aSong)
+                } else {
+                    self.playlist.append(contentsOf: fetcher.playlist)
+                    self.delegate?.fetchPlaylistSuccess(startSong: nil)
                 }
+            } else {
+                self.delegate?.fetchPlaylist(WithDictionary: dict as Dictionary<String, AnyObject>, startAttribute: validAttr, errorThreshould: errCount + 1)
             }
         }
-        session.resume()
     }
 
     public func getOnePlayableItem() -> DMPlayableItem? {
@@ -168,12 +169,14 @@ import AppKit
     }
 
     public func fetchSongs(withMusician musicianID: String, callback: @escaping (Bool) -> Void) {
-        let dict = ["type": DMPlaylistFetcher.kFetchPlaylistTypeNew,
-                    "channel": Int(0),
-                    "r": self.randomString(),
-                    "from": "mainsite",
-                    "context": String("context=channel:0|musician_id:\(musicianID)")] as [String: Any]
-        let urlString = String("\(DMPlaylistFetcher.PLAYLIST_FETCH_URL_BASE)?\(dict.urlEncodedString())")
+        let dict: [String: Any] = [
+            "type": DMPlaylistFetcher.kFetchPlaylistTypeNew,
+            "channel": Int(0),
+            "r": self.randomString(),
+            "from": "mainsite",
+            "context": "context=channel:0|musician_id:\(musicianID)"
+        ]
+        let urlString = DMPlaylistFetcher.PLAYLIST_FETCH_URL_BASE + "?" + dict.urlEncodedString()
         self.sendRequest(forURL: urlString) { list in
             if list != nil {
                 self.playlist.removeAll()
@@ -186,13 +189,15 @@ import AppKit
     }
 
     public func fetchSongs(withSoundtrackID songID: String, callback: @escaping (Bool) -> Void) {
-        let dict = ["type": DMPlaylistFetcher.kFetchPlaylistTypeNew,
-                    "channel": Int(10),
-                    "r": self.randomString(),
-                    "from": "mainsite",
-                    "context": String("context=channel:10|subject_id:\(songID)")] as [String: Any]
+        let dict: [String: Any] = [
+            "type": DMPlaylistFetcher.kFetchPlaylistTypeNew,
+            "channel": Int(10),
+            "r": self.randomString(),
+            "from": "mainsite",
+            "context": "context=channel:10|subject_id:\(songID)"
+        ]
 
-        let urlstring = String("\(DMPlaylistFetcher.PLAYLIST_FETCH_URL_BASE)?\(dict.urlEncodedString())")
+        let urlstring = DMPlaylistFetcher.PLAYLIST_FETCH_URL_BASE + "?" + dict.urlEncodedString()
 
         self.sendRequest(forURL: urlstring) { list in
             if list != nil {
@@ -208,14 +213,16 @@ import AppKit
     public func fetchSongs(withAlbum album: String, callback: @escaping (Bool) -> Void) {
         let data = Date()
         let expire = Int(data.timeIntervalSince1970 + 1000 * 60 * 5 * 30)
-        let dict = ["type": DMPlaylistFetcher.kFetchPlaylistTypeNew,
-                    "context": String("channel:0|subject_id:\(album)"),
-                    "channel": Int(0),
-                    "app_name": "radio_ipad",
-                    "version": "1",
-                    "expire": expire] as [String: Any]
+        let dict: [String: Any] = [
+            "type": DMPlaylistFetcher.kFetchPlaylistTypeNew,
+            "context": "channel:0|subject_id:\(album)",
+            "channel": Int(0),
+            "app_name": "radio_ipad",
+            "version": "1",
+            "expire": expire
+        ]
 
-        let urlstring = String("\(DMPlaylistFetcher.DOUBAN_ALBUM_GET_URL)?\(dict.urlEncodedString())")
+        let urlstring = DMPlaylistFetcher.DOUBAN_ALBUM_GET_URL + "?" + dict.urlEncodedString()
         self.sendRequest(forURL: urlstring) { list in
             if list != nil {
                 var albumSong = [] as Array<Dictionary<String, AnyObject>>
