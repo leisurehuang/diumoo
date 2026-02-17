@@ -1,0 +1,13 @@
+{
+  "images": [
+    {
+      "filename": "192kbps.png",
+      "idiom": "universal",
+      "scale": "1x"
+    }
+  ],
+  "info": {
+    "version": 1,
+    "author": "xcode"
+  }
+}
