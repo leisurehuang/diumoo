@@ -8,12 +8,8 @@
             <connections>
                 <outlet property="albumCoverButton" destination="43" id="98"/>
                 <outlet property="artist" destination="55" id="100"/>
-                <outlet property="indicatorText" destination="87" id="103"/>
-                <outlet property="progressIndicator" destination="86" id="104"/>
                 <outlet property="revertButton" destination="59" id="65"/>
                 <outlet property="songTitle" destination="53" id="99"/>
-                <outlet property="tabBar" destination="17" id="18"/>
-                <outlet property="tabView" destination="23" id="102"/>
                 <outlet property="window" destination="15" id="22"/>
             </connections>
         </customObject>
@@ -29,89 +25,46 @@
                 <rect key="frame" x="0.0" y="0.0" width="400" height="500"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView id="17" customClass="SMTabBar">
-                        <rect key="frame" x="0.0" y="480" width="400" height="20"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <connections>
-                            <outlet property="delegate" destination="-2" id="101"/>
-                        </connections>
-                    </customView>
-                    <tabView type="noTabsNoBorder" initialItem="24" id="23">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="480"/>
+                    <button id="43">
+                        <rect key="frame" x="20" y="121" width="360" height="340"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <font key="font" metaFont="system"/>
-                        <tabViewItems>
-                            <tabViewItem label="View" identifier="1" id="24">
-                                <view key="view" id="27">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="480"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button id="43">
-                                            <rect key="frame" x="20" y="121" width="360" height="340"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="44">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="openAlbumLocation:" target="-2" id="108"/>
-                                            </connections>
-                                        </button>
-                                        <textField verticalHuggingPriority="750" id="53">
-                                            <rect key="frame" x="17" y="76" width="366" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="曲目名" usesSingleLineMode="YES" id="54">
-                                                <font key="font" size="13" name="STHeitiSC-Light"/>
-                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
-                                        <textField verticalHuggingPriority="750" id="55">
-                                            <rect key="frame" x="17" y="57" width="366" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" title="艺术家" usesSingleLineMode="YES" id="56">
-                                                <font key="font" size="13" name="STHeitiSC-Light"/>
-                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
-                                        <button id="59">
-                                            <rect key="frame" x="155" y="20" width="90" height="23"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <buttonCell key="cell" type="smallSquare" title="时间机器" bezelStyle="smallSquare" image="time_machine" imagePosition="left" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="60">
-                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="revert:" target="-2" id="63"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                </view>
-                            </tabViewItem>
-                            <tabViewItem label="Detail" identifier="2" id="25">
-                                <view key="view" id="26">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="480"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <progressIndicator maxValue="100" indeterminate="YES" style="bar" id="86">
-                                            <rect key="frame" x="102" y="216" width="196" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </progressIndicator>
-                                        <textField verticalHuggingPriority="750" id="87">
-                                            <rect key="frame" x="101" y="244" width="198" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="获取专辑详细信息..." id="88">
-                                                <font key="font" size="13" name="STHeitiSC-Light"/>
-                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
-                                    </subviews>
-                                </view>
-                            </tabViewItem>
-                        </tabViewItems>
-                    </tabView>
+                        <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="44">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="openAlbumLocation:" target="-2" id="108"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" id="53">
+                        <rect key="frame" x="17" y="76" width="366" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="曲目名" usesSingleLineMode="YES" id="54">
+                            <font key="font" size="13" name="STHeitiSC-Light"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" id="55">
+                        <rect key="frame" x="17" y="57" width="366" height="17"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <textFieldCell key="cell" lineBreakMode="truncatingMiddle" sendsActionOnEndEditing="YES" alignment="center" title="艺术家" usesSingleLineMode="YES" id="56">
+                            <font key="font" size="13" name="STHeitiSC-Light"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button id="59">
+                        <rect key="frame" x="155" y="20" width="90" height="23"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="smallSquare" title="时间机器" bezelStyle="smallSquare" image="time_machine" imagePosition="left" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="60">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="revert:" target="-2" id="63"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <connections>

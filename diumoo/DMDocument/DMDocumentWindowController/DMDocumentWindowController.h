@@ -8,36 +8,21 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class SMTabBar;
-
 @interface DMDocumentWindowController : NSWindowController <NSWindowDelegate> {
 
-    IBOutlet SMTabBar *tabBar;
-    IBOutlet NSTabView *tabView;
-
-    // -------------------------预览标签页--------------------------
     IBOutlet NSButton *revertButton;
     IBOutlet NSButton *albumCoverButton;
     IBOutlet NSTextField *songTitle;
     IBOutlet NSTextField *artist;
 
-    // ------------------------详细信息标签页------------------------
-    IBOutlet NSTextField *indicatorText;
-    IBOutlet NSProgressIndicator *progressIndicator;
-
-    // -----------------------其他---------------------------------
     NSString *albumTitle;
     NSString *aid;
     NSString *albumLocation;
-
-    NSLock *lock;
 }
 
 - (id)init;
 
 - (void)setupWindowForDocument:(NSDocument *)doc;
-
-- (IBAction)revert:(id)sender;
 
 - (IBAction)playAlbum:(id)sender;
 

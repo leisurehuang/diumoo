@@ -38,6 +38,9 @@
                         owner:self
                      userData:NULL assumeInside:NO];
 
+        [self setTitle:@""];
+        [self setBordered:NO];
+
     }
 
     return self;
@@ -50,11 +53,13 @@
 - (void)mouseEntered:(NSEvent *)event {
     [slide setOpacity:0.6];
     bitratelayer.position = CGPointMake(0, -20);
+    bitratelayer.opacity = 1;
 }
 
 - (void)mouseExited:(NSEvent *)event {
     [slide setOpacity:1.0];
-    bitratelayer.position = CGPointMake(0, -50);
+    bitratelayer.position = CGPointMake(0, -30);
+    bitratelayer.opacity = 0;
 }
 
 - (void)mouseDown:(NSEvent *)theEvent {

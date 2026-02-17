@@ -44,18 +44,23 @@ static CGEventRef tapEventCallback(CGEventTapProxy proxy, CGEventType type, CGEv
 	// Listen to "app switched" event, so that we don't intercept media keys if we
 	// weren't the last "media key listening" app to be active
 	EventTypeSpec eventType = { kEventClassApplication, kEventAppFrontSwitched };
-    OSStatus err = InstallApplicationEventHandler(NewEventHandlerUPP(appSwitched), 1, &eventType,  CFBridgingRetain(self), &_app_switching_ref);
+    OSStatus err = InstallApplicationEventHandler(NewEventHandlerUPP(appSwitched), 1, &eventType, (__bridge void *)self, &_app_switching_ref);
 	assert(err == noErr);
 	
 	eventType.eventKind = kEventAppTerminated;
-    err = InstallApplicationEventHandler(NewEventHandlerUPP(appTerminated), 1, &eventType,  CFBridgingRetain(self), &_app_terminating_ref);
+    err = InstallApplicationEventHandler(NewEventHandlerUPP(appTerminated), 1, &eventType, (__bridge void *)self, &_app_terminating_ref);
 	assert(err == noErr);
 }
 -(void)stopWatchingAppSwitching;
 {
-	if(!_app_switching_ref) return;
-	RemoveEventHandler(_app_switching_ref);
-	_app_switching_ref = NULL;
+	if(_app_switching_ref) {
+		RemoveEventHandler(_app_switching_ref);
+		_app_switching_ref = NULL;
+	}
+	if(_app_terminating_ref) {
+		RemoveEventHandler(_app_terminating_ref);
+		_app_terminating_ref = NULL;
+	}
 }
 
 -(void)startWatchingMediaKeys;{
@@ -309,7 +314,7 @@ NSString *kIgnoreMediaKeysDefaultsKey = @"SPIgnoreMediaKeys";
 
 static pascal OSStatus appSwitched (EventHandlerCallRef nextHandler, EventRef evt, void* userData)
 {
-    SPMediaKeyTap *self = (id)CFBridgingRelease(userData);
+    SPMediaKeyTap *self = (__bridge SPMediaKeyTap *)userData;
 
     ProcessSerialNumber newSerial;
     GetFrontProcess(&newSerial);
@@ -321,7 +326,7 @@ static pascal OSStatus appSwitched (EventHandlerCallRef nextHandler, EventRef ev
 
 static pascal OSStatus appTerminated (EventHandlerCallRef nextHandler, EventRef evt, void* userData)
 {
-    SPMediaKeyTap *self = (id)CFBridgingRelease(userData);
+	SPMediaKeyTap *self = (__bridge SPMediaKeyTap *)userData;
 	
 	ProcessSerialNumber deadPSN;
 
