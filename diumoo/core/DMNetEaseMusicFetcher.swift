@@ -51,13 +51,109 @@ import AppKit
     // MARK: - Initialization
     public override init() {
         super.init()
+        // Initially set to popular playlists as fallback
         self.channels = popularPlaylists
+        
+        // Dynamically fetch channel list from NetEase API
+        fetchChannelsFromAPI()
+        
         print("\(#function) NetEase Music API fetcher initialized")
     }
 
     deinit {
         self.playlist.removeAll()
         self.channels.removeAll()
+    }
+
+    // MARK: - Dynamic Channel Fetching
+    private func fetchChannelsFromAPI() {
+        let urlString = "\(API_BASE_URL)/toplist/detail"
+        guard let url = URL(string: urlString) else {
+            print("\(#function) invalid URL for channel list")
+            return
+        }
+
+        let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
+
+        let session = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            guard let self = self else { return }
+
+            if let error = error {
+                print("\(#function) failed to fetch channels: \(error.localizedDescription)")
+                return
+            }
+
+            guard let data = data else {
+                print("\(#function) received empty data")
+                return
+            }
+
+            do {
+                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let list = json["list"] as? Array<[String: Any]> {
+
+                    // Convert NetEase toplist to channel format
+                    let convertedChannels = list.enumerated().compactMap { index, toplist -> [String: AnyObject]? in
+                        guard let name = toplist["name"] as? String,
+                              let playlistId = toplist["id"] as? Int else {
+                            return nil
+                        }
+
+                        return [
+                            "channel_id": String(index) as AnyObject,
+                            "name": name as AnyObject,
+                            "name_en": self.getEnglishName(for: name) as AnyObject,
+                            "playlist_id": String(playlistId) as AnyObject,
+                            "cover": (toplist["coverImgUrl"] as? String ?? "https://img.icons8.com/ios/512/compact-disc.png") as AnyObject
+                        ]
+                    }
+
+                    if !convertedChannels.isEmpty {
+                        self.channels = convertedChannels
+                        print("\(#function) fetched \(convertedChannels.count) channels from NetEase API")
+                    }
+                } else {
+                    print("\(#function) unexpected JSON format")
+                }
+            } catch {
+                print("\(#function) failed to parse JSON: \(error.localizedDescription)")
+            }
+        }
+        session.resume()
+    }
+
+    // Get English name for Chinese toplist names
+    private func getEnglishName(for chineseName: String) -> String {
+        let nameMap: [String: String] = [
+            "飙升榜": "Soaring",
+            "新歌榜": "New Songs",
+            "热歌榜": "Hot Songs",
+            "说唱榜": "Rap",
+            "欧美榜": "Western",
+            "古典榜": "Classical",
+            "电子榜": "Electronic",
+            "抖音榜": "TikTok",
+            "电音榜": "EDM",
+            "UK排行榜": "UK Chart",
+            "美国Billboard榜": "Billboard",
+            "Beatport全球电子舞曲榜": "Beatport",
+            "韩国Melon排行榜": "Melon",
+            "日本公信榜": "Oricon",
+            "YouTube音乐榜": "YouTube",
+            "台湾Hito排行榜": "Hito",
+            "中国TOP排行榜：港台榜": "China HK/TW",
+            "中国TOP排行榜：内地榜": "China Mainland",
+            "香港电台中文歌曲龙虎榜": "HK Radio",
+            "华语金曲榜": "Chinese Classics",
+            "中国嘻哈榜": "Chinese Hip-Hop",
+            "法国NRJ Vos Hits榜": "NRJ",
+            "韩国Mnet排行榜": "Mnet",
+            "韩国Genie排行榜": "Genie",
+            "壁虎专业": "Gecko",
+            "Billboard日本热榜": "Billboard Japan"
+        ]
+        
+        return nameMap[chineseName] ?? chineseName
     }
 
     // MARK: - Playlist Fetching

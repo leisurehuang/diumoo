@@ -80,7 +80,48 @@
 }
 
 - (void)updateChannelList {
+    // Get channels from NetEase Music fetcher instead of local plist
+    DMPlaylistFetcher *fetcher = [DMPlaylistFetcher sharedController];
+    NSArray *channels = [fetcher getNetEaseChannels];
 
+    if (channels && [channels count] > 0) {
+        // Convert NetEase flat channel list to categorized format expected by buildMenuWithChannelListArray:
+        // Expected format: @[{@"cate": @"Category Name", @"channels": @[{@"id": @(1), @"name": @"Channel"}]}]
+
+        NSMutableArray *channelList = [NSMutableArray array];
+        NSMutableArray *netEaseChannels = [NSMutableArray array];
+
+        // Convert each NetEase channel to the expected format
+        for (NSDictionary *channel in channels) {
+            NSString *channelId = channel[@"channel_id"];
+            NSString *name = channel[@"name"];
+
+            if (channelId && name) {
+                [netEaseChannels addObject:@{
+                    @"id": @([channelId integerValue]),
+                    @"name": name
+                }];
+            }
+        }
+
+        // Create a single category for all NetEase channels
+        [channelList addObject:@{
+            @"cate": @"热门榜单",
+            @"channels": netEaseChannels
+        }];
+
+        NSLog(@"updateChannelList: Loaded %lu channels from NetEase Music", (unsigned long)[channels count]);
+        [self updateMenuItemsWithPublicList:channelList andSuggestList:nil];
+
+    } else {
+        // Fallback to local plist if NetEase fetcher not ready
+        NSLog(@"updateChannelList: NetEase fetcher not available, using fallback");
+        [self updateChannelListFromLocalPlist];
+    }
+}
+
+// New method: fallback to original plist-based loading
+- (void)updateChannelListFromLocalPlist {
     NSString *libraryPath = [DMService pathToDataFileFolder];
     NSString *defaultFilepath = [[NSBundle mainBundle] pathForResource:@"channels" ofType:@"plist"];
     NSString *filepath = nil;

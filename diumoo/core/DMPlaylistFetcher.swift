@@ -37,21 +37,26 @@ extension Dictionary where Key == String, Value == Any {
 }
 
 @objcMembers public class DMPlaylistFetcher: NSObject {
-    // This should actually be an enum type
-    // But Objective-C does not support String type enum
-    // This is all we can do
-    // FIXME: When project convert to Swift completely
-    static public let kFetchPlaylistTypeNew = "n"
-    static public let kFetchPlaylistTypeEnd = "e"
-    static public let kFetchPlaylistTypePlaying = "p"
-    static public let kFetchPlaylistTypeSkip = "s"
-    static public let kFetchPlaylistTypeRate = "r"
-    static public let kFetchPlaylistTypeUnrate = "u"
-    static public let kFetchPlaylistTypeBye = "b"
+    public static let kFetchPlaylistTypeNew = "n"
+    public static let kFetchPlaylistTypeEnd = "e"
+    public static let kFetchPlaylistTypePlaying = "p"
+    public static let kFetchPlaylistTypePause = "u"
+    public static let kFetchPlaylistTypeSkip = "s"
+    public static let kFetchPlaylistTypeBan = "b"
+    public static let kFetchPlaylistTypeBye = "b"
+    public static let kFetchPlaylistTypeLike = "r"
+    public static let kFetchPlaylistTypeRate = "r"
+    public static let kFetchPlaylistTypeUnrate = "ur"
 
-    static internal let PLAYLIST_FETCH_URL_BASE = "https://douban.fm/j/mine/playlist"
-    static internal let DOUBAN_FM_ORIGIN_URL = ".douban.fm"
-    static internal let DOUBAN_ALBUM_GET_URL = "https://douban.fm/j/app/radio/people"
+    // Expose sharedController to Objective-C
+    @objc public class func sharedController() -> DMPlaylistFetcher {
+        return sharedInstance
+    }
+
+    // Singleton instance
+    private static let sharedInstance: DMPlaylistFetcher = {
+        return DMPlaylistFetcher()
+    }()
 
     public var delegate: DMPlaylistFetcherDelegate?
 
@@ -63,6 +68,14 @@ extension Dictionary where Key == String, Value == Any {
     internal lazy var netEaseFetcherInstance: DMNetEaseMusicFetcher = {
         return DMNetEaseMusicFetcher()
     }()
+
+    // Expose netEaseFetcherInstance to Objective-C
+    @objc public func getNetEaseChannels() -> Array<Dictionary<String, AnyObject>> {
+        if self.netEaseFetcher == nil {
+            self.netEaseFetcher = self.netEaseFetcherInstance
+        }
+        return self.netEaseFetcher?.getChannels() ?? []
+    }
 
     internal func randomString() -> String {
         let rand1: UInt32 = arc4random();
@@ -150,95 +163,25 @@ extension Dictionary where Key == String, Value == Any {
     }
 
     internal func sendRequest(forURL urlString: String, callback: @escaping (Array<Dictionary<String, AnyObject>>?) -> Void) {
-        let url = URL.init(string: urlString)
-        let request = URLRequest.init(url: url!, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
-
-        let session = URLSession.shared.dataTask(with: request) { data, response, error in
-            if data != nil {
-                do {
-                    let jResponse = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers)
-                    let albumDict = jResponse as! Dictionary<String, AnyObject>
-                    let songArray = albumDict["song"] as? Array<Dictionary<String, AnyObject>>
-                    callback(songArray)
-                } catch {
-                    print("\(#function) ::  Invalid Json returned from server")
-                }
-            }
-        }
-        session.resume()
+        // Note: This method is deprecated and no longer used
+        // NetEase Music API is used instead
+        print("\(#function) WARNING: sendRequest is deprecated, not fetching from \(urlString)")
+        callback(nil)
     }
 
     public func fetchSongs(withMusician musicianID: String, callback: @escaping (Bool) -> Void) {
-        let dict: [String: Any] = [
-            "type": DMPlaylistFetcher.kFetchPlaylistTypeNew,
-            "channel": Int(0),
-            "r": self.randomString(),
-            "from": "mainsite",
-            "context": "context=channel:0|musician_id:\(musicianID)"
-        ]
-        let urlString = DMPlaylistFetcher.PLAYLIST_FETCH_URL_BASE + "?" + dict.urlEncodedString()
-        self.sendRequest(forURL: urlString) { list in
-            if list != nil {
-                self.playlist.removeAll()
-                self.playlist.append(contentsOf: list!)
-                callback(true)
-            } else {
-                callback(false)
-            }
-        }
+        // Deprecated: Douban FM API method, no longer supported
+        print("\(#function) Deprecated method called - not supported")
+        callback(false)
     }
 
     public func fetchSongs(withSoundtrackID songID: String, callback: @escaping (Bool) -> Void) {
-        let dict: [String: Any] = [
-            "type": DMPlaylistFetcher.kFetchPlaylistTypeNew,
-            "channel": Int(10),
-            "r": self.randomString(),
-            "from": "mainsite",
-            "context": "context=channel:10|subject_id:\(songID)"
-        ]
-
-        let urlstring = DMPlaylistFetcher.PLAYLIST_FETCH_URL_BASE + "?" + dict.urlEncodedString()
-
-        self.sendRequest(forURL: urlstring) { list in
-            if list != nil {
-                self.playlist.removeAll()
-                self.playlist.append(contentsOf: list!)
-                callback(true)
-            } else {
-                callback(false)
-            }
-        }
+        // Deprecated: Douban FM API method, no longer supported
+        print("\(#function) Deprecated method called - not supported")
+        callback(false)
     }
 
     public func fetchSongs(withAlbum album: String, callback: @escaping (Bool) -> Void) {
-        let data = Date()
-        let expire = Int(data.timeIntervalSince1970 + 1000 * 60 * 5 * 30)
-        let dict: [String: Any] = [
-            "type": DMPlaylistFetcher.kFetchPlaylistTypeNew,
-            "context": "channel:0|subject_id:\(album)",
-            "channel": Int(0),
-            "app_name": "radio_ipad",
-            "version": "1",
-            "expire": expire
-        ]
-
-        let urlstring = DMPlaylistFetcher.DOUBAN_ALBUM_GET_URL + "?" + dict.urlEncodedString()
-        self.sendRequest(forURL: urlstring) { list in
-            if list != nil {
-                var albumSong = [] as Array<Dictionary<String, AnyObject>>
-                for song in list! {
-                    if song["aid"] as! String == album {
-                        albumSong.append(song)
-                    }
-                }
-                if albumSong.count > 0 {
-                    self.playlist = albumSong
-                    callback(true)
-                } else {
-                    callback(false)
-                }
-            }
-        }
-
+        callback(false)
     }
 }
