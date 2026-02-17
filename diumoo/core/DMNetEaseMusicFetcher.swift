@@ -3,7 +3,7 @@
 //  diumoo
 //
 //  Created by OpenCode Agent on 2/17/2026.
-//  NetEase Cloud Music API Client (using local API server)
+//  NetEase Cloud Music API Client (native implementation)
 //
 
 import Foundation
@@ -12,7 +12,6 @@ import AppKit
 @objcMembers public class DMNetEaseMusicFetcher: NSObject {
 
     // MARK: - API Configuration
-    internal let API_BASE_URL = "http://localhost:3000"
     internal var playlist: Array<Dictionary<String, AnyObject>> = []
     internal var channels: Array<Dictionary<String, AnyObject>> = []
 
@@ -67,59 +66,37 @@ import AppKit
 
     // MARK: - Dynamic Channel Fetching
     private func fetchChannelsFromAPI() {
-        let urlString = "\(API_BASE_URL)/toplist/detail"
-        guard let url = URL(string: urlString) else {
-            print("\(#function) invalid URL for channel list")
-            return
-        }
+        print("📡 Fetching channels from NetEase native API...")
 
-        let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
-
-        let session = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+        DMNetEaseAPIClient.shared.fetchToplistDetail { [weak self] result in
             guard let self = self else { return }
 
-            if let error = error {
-                print("\(#function) failed to fetch channels: \(error.localizedDescription)")
+            guard let result = result,
+                  let list = result["list"] as? Array<[String: Any]> else {
+                print("❌ Failed to parse toplist data")
                 return
             }
 
-            guard let data = data else {
-                print("\(#function) received empty data")
-                return
-            }
-
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                   let list = json["list"] as? Array<[String: Any]> {
-
-                    // Convert NetEase toplist to channel format
-                    let convertedChannels = list.enumerated().compactMap { index, toplist -> [String: AnyObject]? in
-                        guard let name = toplist["name"] as? String,
-                              let playlistId = toplist["id"] as? Int else {
-                            return nil
-                        }
-
-                        return [
-                            "channel_id": String(index) as AnyObject,
-                            "name": name as AnyObject,
-                            "name_en": self.getEnglishName(for: name) as AnyObject,
-                            "playlist_id": String(playlistId) as AnyObject,
-                            "cover": (toplist["coverImgUrl"] as? String ?? "https://img.icons8.com/ios/512/compact-disc.png") as AnyObject
-                        ]
-                    }
-
-                    if !convertedChannels.isEmpty {
-                        self.channels = convertedChannels
-                        print("\(#function) fetched \(convertedChannels.count) channels from NetEase API")
-                    }
-                } else {
-                    print("\(#function) unexpected JSON format")
+            let convertedChannels = list.enumerated().compactMap { index, toplist -> [String: AnyObject]? in
+                guard let name = toplist["name"] as? String,
+                      let playlistId = toplist["id"] as? Int else {
+                    return nil
                 }
-            } catch {
-                print("\(#function) failed to parse JSON: \(error.localizedDescription)")
+
+                return [
+                    "channel_id": String(index) as AnyObject,
+                    "name": name as AnyObject,
+                    "name_en": self.getEnglishName(for: name) as AnyObject,
+                    "playlist_id": String(playlistId) as AnyObject,
+                    "cover": (toplist["coverImgUrl"] as? String ?? "https://img.icons8.com/ios/512/compact-disc.png") as AnyObject
+                ]
+            }
+
+            if !convertedChannels.isEmpty {
+                self.channels = convertedChannels
+                print("✅ Fetched \(convertedChannels.count) channels from NetEase native API")
             }
         }
-        session.resume()
     }
 
     // Get English name for Chinese toplist names
@@ -161,59 +138,34 @@ import AppKit
         print("\(#function) fetching playlist for channel \(channelId)")
 
         // Find playlist by channel_id
-        guard let playlistInfo = popularPlaylists.first(where: { ($0["channel_id"] as? String) == channelId }),
+        guard let playlistInfo = channels.first(where: { ($0["channel_id"] as? String) == channelId }),
               let playlistId = playlistInfo["playlist_id"] as? String else {
             print("\(#function) invalid channel ID: \(channelId)")
             callback(false)
             return
         }
 
-        // Fetch playlist tracks from NetEase API
-        let urlString = "\(API_BASE_URL)/playlist/track/all?id=\(playlistId)&limit=\(count)"
-        guard let url = URL(string: urlString) else {
-            print("\(#function) invalid URL: \(urlString)")
-            callback(false)
-            return
-        }
-
-        let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 20.0)
-
-        let session = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            guard let self = self else { return }
-
-            if let error = error {
-                print("\(#function) request failed: \(error.localizedDescription)")
+        // Fetch playlist tracks using native API
+        DMNetEaseAPIClient.shared.fetchPlaylistTracks(playlistId: playlistId, limit: count) { [weak self] songs in
+            guard let self = self else {
                 callback(false)
                 return
             }
 
-            guard let data = data else {
-                print("\(#function) received empty data")
+            guard let songs = songs, !songs.isEmpty else {
+                print("\(#function) no songs found")
                 callback(false)
                 return
             }
 
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                   let songs = json["songs"] as? Array<[String: Any]> {
-
-                    // First, convert without real URLs
-                    let tempSongs = songs.compactMap { song -> [String: AnyObject]? in
-                        return self.convertNetEaseSongToDoubanFormat(song)
-                    }
-
-                    // Then fetch real URLs for all songs
-                    self.fetchRealUrlsForSongs(tempSongs, callback: callback)
-                } else {
-                    print("\(#function) unexpected JSON format")
-                    callback(false)
-                }
-            } catch {
-                print("\(#function) failed to parse JSON: \(error.localizedDescription)")
-                callback(false)
+            // Convert songs to Douban format (without real URLs yet)
+            let tempSongs = songs.compactMap { song -> [String: AnyObject]? in
+                return self.convertNetEaseSongToDoubanFormat(song)
             }
+
+            // Fetch real URLs for all songs
+            self.fetchRealUrlsForSongs(tempSongs, callback: callback)
         }
-        session.resume()
     }
 
     // Fetch real URLs for all songs (batch processing)
@@ -224,35 +176,24 @@ import AppKit
             return
         }
 
+        print("🎵 Fetching real URLs for \(songs.count) songs...")
+
         let group = DispatchGroup()
         var songsWithUrls: Array<Dictionary<String, AnyObject>> = []
         let queue = DispatchQueue(label: "com.diumoo.songUrls", attributes: .concurrent)
 
-        for (index, song) in songs.enumerated() {
+        for song in songs {
             group.enter()
-            guard let songId = song["sid"] as? String else {
+            guard let songId = song["sid"] as? String,
+                  let songIdInt = Int(songId) else {
                 group.leave()
                 continue
             }
 
-            // Fetch real URL for this song
-            let urlString = "\(API_BASE_URL)/song/url?id=\(songId)"
-            guard let url = URL(string: urlString) else {
-                group.leave()
-                continue
-            }
-
-            let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 5.0)
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            DMNetEaseAPIClient.shared.fetchSongURL(songId: songIdInt) { realUrl in
                 defer { group.leave() }
 
-                guard let data = data,
-                      let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                      let dataArray = json["data"] as? Array<[String: Any]>,
-                      let firstSong = dataArray.first,
-                      let realUrl = firstSong["url"] as? String,
-                      !realUrl.isEmpty else {
-                    // Skip songs without valid URLs
+                guard let realUrl = realUrl, !realUrl.isEmpty else {
                     return
                 }
 
@@ -263,10 +204,6 @@ import AppKit
                     songsWithUrls.append(updatedSong)
                 }
             }
-            task.resume()
-
-            // Add delay to avoid rate limiting
-            Thread.sleep(forTimeInterval: 0.1)
         }
 
         group.notify(queue: .main) { [weak self] in
@@ -282,7 +219,7 @@ import AppKit
             self.playlist.removeAll()
             self.playlist.append(contentsOf: sortedSongs)
 
-            print("\(#function) fetched \(self.playlist.count) songs with real URLs")
+            print("✅ Fetched \(self.playlist.count) songs with real URLs")
             callback(true)
         }
     }
@@ -370,40 +307,13 @@ import AppKit
 
     // MARK: - Helper: Fetch actual song URL
     public func fetchRealSongUrl(forSongId songId: String, callback: @escaping (String?) -> Void) {
-        let urlString = "\(API_BASE_URL)/song/url?id=\(songId)"
-        guard let url = URL(string: urlString) else {
+        guard let songIdInt = Int(songId) else {
             callback(nil)
             return
         }
 
-        let request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
-
-        let session = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("\(#function) failed: \(error.localizedDescription)")
-                callback(nil)
-                return
-            }
-
-            guard let data = data else {
-                callback(nil)
-                return
-            }
-
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                   let dataArray = json["data"] as? Array<[String: Any]>,
-                   let firstSong = dataArray.first,
-                   let realUrl = firstSong["url"] as? String {
-                    callback(realUrl)
-                } else {
-                    callback(nil)
-                }
-            } catch {
-                print("\(#function) JSON parse error: \(error.localizedDescription)")
-                callback(nil)
-            }
+        DMNetEaseAPIClient.shared.fetchSongURL(songId: songIdInt) { realUrl in
+            callback(realUrl)
         }
-        session.resume()
     }
 }

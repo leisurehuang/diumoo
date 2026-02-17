@@ -54,6 +54,8 @@
 		AB7BCA702F43763B00E53DFF /* DMBaiduMusicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA6F2F43763B00E53DFF /* DMBaiduMusicFetcher.swift */; };
 		AB7BCA722F4378C900E53DFF /* DMLocalMusicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA712F4378C900E53DFF /* DMLocalMusicFetcher.swift */; };
 		AB7BCA742F437B9700E53DFF /* DMNetEaseMusicFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA732F437B9700E53DFF /* DMNetEaseMusicFetcher.swift */; };
+		AB7BCA772F44776A00E53DFF /* DMNetEaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA752F44776A00E53DFF /* DMNetEaseAPIClient.swift */; };
+		AB7BCA782F44776A00E53DFF /* DMNetEaseCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA762F44776A00E53DFF /* DMNetEaseCrypto.swift */; };
 		F501B3B715877062001C6158 /* DMCoverControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = F501B3B015877062001C6158 /* DMCoverControlView.m */; };
 		F501B3B815877062001C6158 /* DMCoverSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = F501B3B315877062001C6158 /* DMCoverSlide.m */; };
 		F501B3BD1587708F001C6158 /* DMPanelWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F501B3BB1587708F001C6158 /* DMPanelWindowController.m */; };
@@ -223,6 +225,8 @@
 		AB7BCA6F2F43763B00E53DFF /* DMBaiduMusicFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMBaiduMusicFetcher.swift; sourceTree = "<group>"; };
 		AB7BCA712F4378C900E53DFF /* DMLocalMusicFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMLocalMusicFetcher.swift; sourceTree = "<group>"; };
 		AB7BCA732F437B9700E53DFF /* DMNetEaseMusicFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNetEaseMusicFetcher.swift; sourceTree = "<group>"; };
+		AB7BCA752F44776A00E53DFF /* DMNetEaseAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNetEaseAPIClient.swift; sourceTree = "<group>"; };
+		AB7BCA762F44776A00E53DFF /* DMNetEaseCrypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNetEaseCrypto.swift; sourceTree = "<group>"; };
 		BE91A78563AA81EABA8B8D0E /* Pods-diumoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diumoo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-diumoo/Pods-diumoo.debug.xcconfig"; sourceTree = "<group>"; };
 		F501B3AF15877062001C6158 /* DMCoverControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMCoverControlView.h; sourceTree = "<group>"; };
 		F501B3B015877062001C6158 /* DMCoverControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMCoverControlView.m; sourceTree = "<group>"; };
@@ -595,6 +599,8 @@
 		F5148B1F1580E904002B3D61 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				AB7BCA752F44776A00E53DFF /* DMNetEaseAPIClient.swift */,
+				AB7BCA762F44776A00E53DFF /* DMNetEaseCrypto.swift */,
 				AB7BCA732F437B9700E53DFF /* DMNetEaseMusicFetcher.swift */,
 				AB7BCA712F4378C900E53DFF /* DMLocalMusicFetcher.swift */,
 				AB7BCA6F2F43763B00E53DFF /* DMBaiduMusicFetcher.swift */,
@@ -1188,6 +1194,8 @@
 				F515C16015B6F07500210826 /* MenubarController.m in Sources */,
 				F515C16115B6F07500210826 /* StatusItemView.m in Sources */,
 				F566F60E15C6E4A200FC7143 /* NSImage+AsyncLoadImage.m in Sources */,
+				AB7BCA772F44776A00E53DFF /* DMNetEaseAPIClient.swift in Sources */,
+				AB7BCA782F44776A00E53DFF /* DMNetEaseCrypto.swift in Sources */,
 				F53C78DE15CC0AA000201C65 /* DMService.m in Sources */,
 				F53C78EB15CC0D0C00201C65 /* NSData+AESCrypt.m in Sources */,
 				F53C78EC15CC0D0C00201C65 /* NSData+Base64.m in Sources */,
@@ -1323,7 +1331,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -1367,7 +1375,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
@@ -1399,7 +1407,7 @@
 				);
 				INFOPLIST_FILE = "diumoo/diumoo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lxml2",
@@ -1439,7 +1447,7 @@
 				);
 				INFOPLIST_FILE = "diumoo/diumoo-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lxml2",
