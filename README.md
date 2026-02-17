@@ -155,9 +155,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- **NetEase Cloud Music** for providing the music API
-- **Original Diumoo** by Shanzi for the inspiration
-- **Contributors** who have helped improve this project
+This project is a fork of the original **[Diumoo](https://github.com/shanzi/diumoo)** by **[Shanzi](https://github.com/shanzi)**.
+
+Special thanks to:
+- **[Shanzi](https://github.com/shanzi)** - Original author and creator of Diumoo
+- **NetEase Cloud Music** - For providing the music API
+- **All Contributors** - Who have helped improve this project over the years
 
 ## 📮 Contact
 
