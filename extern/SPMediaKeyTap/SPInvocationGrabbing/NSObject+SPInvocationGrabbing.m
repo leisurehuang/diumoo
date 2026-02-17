@@ -3,12 +3,17 @@
 
 #pragma mark Invocation grabbing
 @interface SPInvocationGrabber ()
-@property (readwrite, retain, nonatomic) id object;
-@property (readwrite, retain, nonatomic) NSInvocation *invocation;
+@property (readwrite, strong, nonatomic) id object;
+@property (readwrite, strong, nonatomic) NSInvocation *invocation;
 
 @end
 
 @implementation SPInvocationGrabber
+- (id)init;
+{
+	return [self initWithObject:nil stacktraceSaving:YES];
+}
+
 - (id)initWithObject:(id)obj;
 {
 	return [self initWithObject:obj stacktraceSaving:YES];
@@ -16,31 +21,31 @@
 
 -(id)initWithObject:(id)obj stacktraceSaving:(BOOL)saveStack;
 {
-	self.object = obj;
+	self = [super init];
+	if(self) {
+		_object = obj;
 
-	if(saveStack)
-		[self saveBacktrace];
-
+		if(saveStack)
+			[self saveBacktrace];
+	}
 	return self;
 }
 -(void)dealloc;
 {
 	free(frameStrings);
-	self.object = nil;
-	self.invocation = nil;
-	[super dealloc];
 }
 @synthesize invocation = _invocation, object = _object;
 
 @synthesize backgroundAfterForward, onMainAfterForward, waitUntilDone;
 - (void)runInBackground;
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	@try {
-		[self invoke];
-	}
-	@finally {
-		[pool drain];
+	@autoreleasepool {
+		@try {
+			[self invoke];
+		}
+		@catch (NSException *exception) {
+			NSLog(@"Exception in background thread: %@", exception);
+		}
 	}
 }
 
@@ -98,7 +103,7 @@
 @implementation NSObject (SPInvocationGrabbing)
 -(id)grab;
 {
-	return [[[SPInvocationGrabber alloc] initWithObject:self] autorelease];
+	return [[SPInvocationGrabber alloc] initWithObject:self];
 }
 -(id)invokeAfter:(NSTimeInterval)delta;
 {

@@ -11,12 +11,12 @@
 }
 -(id)initWithObject:(id)obj;
 -(id)initWithObject:(id)obj stacktraceSaving:(BOOL)saveStack;
-@property (readonly, retain, nonatomic) id object;
-@property (readonly, retain, nonatomic) NSInvocation *invocation;
+@property (readonly, strong, nonatomic) id object;
+@property (readonly, strong, nonatomic) NSInvocation *invocation;
 @property BOOL backgroundAfterForward;
 @property BOOL onMainAfterForward;
 @property BOOL waitUntilDone;
--(void)invoke; // will release object and invocation
+-(void)invoke;
 -(void)printBacktrace;
 -(void)saveBacktrace;
 @end

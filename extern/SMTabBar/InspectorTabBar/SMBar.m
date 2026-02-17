@@ -45,13 +45,14 @@
     if ([[self window] isKeyWindow]) {
         static NSGradient *gradient = nil;
         static NSColor *borderColor = nil;
-        if (!gradient) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
             NSColor *color1 = [NSColor colorWithCalibratedWhite:0.851f alpha:1.0f];
             NSColor *color2 = [NSColor colorWithCalibratedWhite:0.700f alpha:1.0f];
             gradient = [[NSGradient alloc] initWithStartingColor:color1
                                                      endingColor:color2];
             borderColor = [NSColor colorWithCalibratedWhite:0.416 alpha:1];
-        }
+        });
     
         // Draw bar gradient
         [gradient drawInRect:self.bounds angle:90.0];
@@ -66,13 +67,14 @@
     } else {
         static NSGradient *gradient = nil;
         static NSColor *borderColor = nil;
-        if (!gradient) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
             NSColor *color1 = [NSColor colorWithCalibratedWhite:0.965 alpha:1];
             NSColor *color2 = [NSColor colorWithCalibratedWhite:0.851 alpha:1];
             gradient = [[NSGradient alloc] initWithStartingColor:color1
                                                      endingColor:color2];
             borderColor = [NSColor colorWithCalibratedWhite:0.651 alpha:1];
-        }
+        });
         
         // Draw bar gradient
         [gradient drawInRect:self.bounds angle:90.0];
@@ -90,19 +92,22 @@
 
 // add noise pattern, see http://stackoverflow.com/questions/8766239
 - (void)drawNoisePattern {
-    static CGImageRef noisePattern = nil;
-    if (noisePattern == nil) {
+    static CGImageRef noisePattern = NULL;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         noisePattern = SMNoiseImageCreate(128, 128, 0.015);
+    });
+    
+    if (noisePattern) {
+        [NSGraphicsContext saveGraphicsState];
+        
+        [[NSGraphicsContext currentContext] setCompositingOperation:NSCompositePlusLighter];
+        CGRect noisePatternRect = CGRectMake(0.0f, 0.0f, CGImageGetWidth(noisePattern), CGImageGetHeight(noisePattern));
+        CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
+        CGContextDrawTiledImage(context, noisePatternRect, noisePattern);
+        
+        [NSGraphicsContext restoreGraphicsState];
     }
-    
-    [NSGraphicsContext saveGraphicsState];
-    
-    [[NSGraphicsContext currentContext] setCompositingOperation:NSCompositePlusLighter];
-    CGRect noisePatternRect = CGRectMake(0.0f, 0.0f, CGImageGetWidth(noisePattern), CGImageGetHeight(noisePattern));
-    CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
-    CGContextDrawTiledImage(context, noisePatternRect, noisePattern);
-    
-    [NSGraphicsContext restoreGraphicsState];
 }
 
 static CGImageRef SMNoiseImageCreate(NSUInteger width, NSUInteger height, CGFloat factor) {

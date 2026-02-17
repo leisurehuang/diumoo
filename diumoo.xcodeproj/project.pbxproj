@@ -3,14 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		175773FC16A38FB100F6E4C7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175773FB16A38FB100F6E4C7 /* CoreMedia.framework */; };
 		1758595D16A313CA00AAAFBE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1758595C16A313CA00AAAFBE /* AVFoundation.framework */; };
 		177F3CCD1630F42D00FE4780 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 177F3CCC1630F42D00FE4780 /* IOKit.framework */; };
-		38F8ACF17FBDD685F6B48658 /* libPods-diumoo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D2B03A41D0AEC7208214B3 /* libPods-diumoo.a */; };
 		3F50FC4415DB4981000E5147 /* DMButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F50FC4315DB4981000E5147 /* DMButton.m */; };
 		3F8A956415D9FEE500701895 /* DMPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F8A956315D9FEE500701895 /* DMPanel.m */; };
 		3FBE809915D4A632001A3BEC /* DMErrorLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FBE809815D4A632001A3BEC /* DMErrorLog.m */; };
@@ -19,6 +18,14 @@
 		AB7BCA772F44776A00E53DFF /* DMNetEaseAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA752F44776A00E53DFF /* DMNetEaseAPIClient.swift */; };
 		AB7BCA7A2F44815500E53DFF /* DMNetEaseCrypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7BCA792F44815500E53DFF /* DMNetEaseCrypto.swift */; };
 		AB7BCA802F448AFB00E53DFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB7BCA7F2F448AFB00E53DFF /* Assets.xcassets */; };
+		ABA7FE252F4494FD0000642A /* NSDictionary+SMKeyValueObserving.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA7FE142F4494FD0000642A /* NSDictionary+SMKeyValueObserving.m */; };
+		ABA7FE262F4494FD0000642A /* NSObject+SPInvocationGrabbing.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA7FE202F4494FD0000642A /* NSObject+SPInvocationGrabbing.m */; };
+		ABA7FE272F4494FD0000642A /* SMTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA7FE1C2F4494FD0000642A /* SMTabBarItem.m */; };
+		ABA7FE282F4494FD0000642A /* SMTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA7FE182F4494FD0000642A /* SMTabBar.m */; };
+		ABA7FE292F4494FD0000642A /* SPMediaKeyTap.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA7FE232F4494FD0000642A /* SPMediaKeyTap.m */; };
+		ABA7FE2A2F4494FD0000642A /* SMTabBarButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA7FE1A2F4494FD0000642A /* SMTabBarButtonCell.m */; };
+		ABA7FE2B2F4494FD0000642A /* SMBar.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA7FE162F4494FD0000642A /* SMBar.m */; };
+		EE5D50E6A8EC19578E7FD131 /* libPods-diumoo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A59F272867389CDAD17E6CA1 /* libPods-diumoo.a */; };
 		F501B3B715877062001C6158 /* DMCoverControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = F501B3B015877062001C6158 /* DMCoverControlView.m */; };
 		F501B3B815877062001C6158 /* DMCoverSlide.m in Sources */ = {isa = PBXBuildFile; fileRef = F501B3B315877062001C6158 /* DMCoverSlide.m */; };
 		F501B3BD1587708F001C6158 /* DMPanelWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = F501B3BB1587708F001C6158 /* DMPanelWindowController.m */; };
@@ -71,6 +78,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0537EC2A6E69614A89C2C584 /* Pods-diumoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diumoo.debug.xcconfig"; path = "Target Support Files/Pods-diumoo/Pods-diumoo.debug.xcconfig"; sourceTree = "<group>"; };
 		175773FB16A38FB100F6E4C7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		1758595C16A313CA00AAAFBE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		177F3CCC1630F42D00FE4780 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
@@ -81,7 +89,6 @@
 		1AC4883824E3D81200737B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DMPrefsPanel.xib; sourceTree = "<group>"; };
 		1AC4883924E3D81200737B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/DMPanelWindowController.xib; sourceTree = "<group>"; };
 		1AC4883A24E3D81200737B9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		20D2B03A41D0AEC7208214B3 /* libPods-diumoo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-diumoo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F50FC4215DB4981000E5147 /* DMButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMButton.h; sourceTree = "<group>"; };
 		3F50FC4315DB4981000E5147 /* DMButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMButton.m; sourceTree = "<group>"; };
 		3F8A956215D9FEE500701895 /* DMPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMPanel.h; sourceTree = "<group>"; };
@@ -89,12 +96,26 @@
 		3FBE809715D4A632001A3BEC /* DMErrorLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DMErrorLog.h; path = DMErrorLog/DMErrorLog.h; sourceTree = "<group>"; };
 		3FBE809815D4A632001A3BEC /* DMErrorLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DMErrorLog.m; path = DMErrorLog/DMErrorLog.m; sourceTree = "<group>"; };
 		41BD4EB51FED50700028B8BC /* DockImageProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockImageProvider.swift; sourceTree = "<group>"; };
-		9EAD9E5D5CB65D7EDCE8478F /* Pods-diumoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diumoo.release.xcconfig"; path = "Pods/Target Support Files/Pods-diumoo/Pods-diumoo.release.xcconfig"; sourceTree = "<group>"; };
+		A59F272867389CDAD17E6CA1 /* libPods-diumoo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-diumoo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB7BCA732F437B9700E53DFF /* DMNetEaseMusicFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNetEaseMusicFetcher.swift; sourceTree = "<group>"; };
 		AB7BCA752F44776A00E53DFF /* DMNetEaseAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNetEaseAPIClient.swift; sourceTree = "<group>"; };
 		AB7BCA792F44815500E53DFF /* DMNetEaseCrypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMNetEaseCrypto.swift; sourceTree = "<group>"; };
 		AB7BCA7F2F448AFB00E53DFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BE91A78563AA81EABA8B8D0E /* Pods-diumoo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diumoo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-diumoo/Pods-diumoo.debug.xcconfig"; sourceTree = "<group>"; };
+		ABA7FE132F4494FD0000642A /* NSDictionary+SMKeyValueObserving.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SMKeyValueObserving.h"; sourceTree = "<group>"; };
+		ABA7FE142F4494FD0000642A /* NSDictionary+SMKeyValueObserving.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SMKeyValueObserving.m"; sourceTree = "<group>"; };
+		ABA7FE152F4494FD0000642A /* SMBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMBar.h; sourceTree = "<group>"; };
+		ABA7FE162F4494FD0000642A /* SMBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMBar.m; sourceTree = "<group>"; };
+		ABA7FE172F4494FD0000642A /* SMTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMTabBar.h; sourceTree = "<group>"; };
+		ABA7FE182F4494FD0000642A /* SMTabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMTabBar.m; sourceTree = "<group>"; };
+		ABA7FE192F4494FD0000642A /* SMTabBarButtonCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMTabBarButtonCell.h; sourceTree = "<group>"; };
+		ABA7FE1A2F4494FD0000642A /* SMTabBarButtonCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMTabBarButtonCell.m; sourceTree = "<group>"; };
+		ABA7FE1B2F4494FD0000642A /* SMTabBarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SMTabBarItem.h; sourceTree = "<group>"; };
+		ABA7FE1C2F4494FD0000642A /* SMTabBarItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SMTabBarItem.m; sourceTree = "<group>"; };
+		ABA7FE1F2F4494FD0000642A /* NSObject+SPInvocationGrabbing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+SPInvocationGrabbing.h"; sourceTree = "<group>"; };
+		ABA7FE202F4494FD0000642A /* NSObject+SPInvocationGrabbing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SPInvocationGrabbing.m"; sourceTree = "<group>"; };
+		ABA7FE222F4494FD0000642A /* SPMediaKeyTap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPMediaKeyTap.h; sourceTree = "<group>"; };
+		ABA7FE232F4494FD0000642A /* SPMediaKeyTap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPMediaKeyTap.m; sourceTree = "<group>"; };
+		EAACB1F82587FEB568BEFB7C /* Pods-diumoo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diumoo.release.xcconfig"; path = "Target Support Files/Pods-diumoo/Pods-diumoo.release.xcconfig"; sourceTree = "<group>"; };
 		F501B3AF15877062001C6158 /* DMCoverControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMCoverControlView.h; sourceTree = "<group>"; };
 		F501B3B015877062001C6158 /* DMCoverControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMCoverControlView.m; sourceTree = "<group>"; };
 		F501B3B215877062001C6158 /* DMCoverSlide.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMCoverSlide.h; sourceTree = "<group>"; };
@@ -199,20 +220,20 @@
 				F5148B4C1580EE4D002B3D61 /* Security.framework in Frameworks */,
 				F5148B4A1580EE1F002B3D61 /* Carbon.framework in Frameworks */,
 				F5148AB31580E58D002B3D61 /* Cocoa.framework in Frameworks */,
-				38F8ACF17FBDD685F6B48658 /* libPods-diumoo.a in Frameworks */,
+				EE5D50E6A8EC19578E7FD131 /* libPods-diumoo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		24544BA4F17D121B54ED9379 /* Pods */ = {
+		030B3033FE6F162F111D8A91 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BE91A78563AA81EABA8B8D0E /* Pods-diumoo.debug.xcconfig */,
-				9EAD9E5D5CB65D7EDCE8478F /* Pods-diumoo.release.xcconfig */,
+				0537EC2A6E69614A89C2C584 /* Pods-diumoo.debug.xcconfig */,
+				EAACB1F82587FEB568BEFB7C /* Pods-diumoo.release.xcconfig */,
 			);
-			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		3F50FC4115DB4981000E5147 /* DMButton */ = {
@@ -239,6 +260,50 @@
 				41BD4EB51FED50700028B8BC /* DockImageProvider.swift */,
 			);
 			path = DockIcon;
+			sourceTree = "<group>";
+		};
+		ABA7FE1D2F4494FD0000642A /* InspectorTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				ABA7FE132F4494FD0000642A /* NSDictionary+SMKeyValueObserving.h */,
+				ABA7FE142F4494FD0000642A /* NSDictionary+SMKeyValueObserving.m */,
+				ABA7FE152F4494FD0000642A /* SMBar.h */,
+				ABA7FE162F4494FD0000642A /* SMBar.m */,
+				ABA7FE172F4494FD0000642A /* SMTabBar.h */,
+				ABA7FE182F4494FD0000642A /* SMTabBar.m */,
+				ABA7FE192F4494FD0000642A /* SMTabBarButtonCell.h */,
+				ABA7FE1A2F4494FD0000642A /* SMTabBarButtonCell.m */,
+				ABA7FE1B2F4494FD0000642A /* SMTabBarItem.h */,
+				ABA7FE1C2F4494FD0000642A /* SMTabBarItem.m */,
+			);
+			path = InspectorTabBar;
+			sourceTree = "<group>";
+		};
+		ABA7FE1E2F4494FD0000642A /* SMTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				ABA7FE1D2F4494FD0000642A /* InspectorTabBar */,
+			);
+			path = SMTabBar;
+			sourceTree = "<group>";
+		};
+		ABA7FE212F4494FD0000642A /* SPInvocationGrabbing */ = {
+			isa = PBXGroup;
+			children = (
+				ABA7FE1F2F4494FD0000642A /* NSObject+SPInvocationGrabbing.h */,
+				ABA7FE202F4494FD0000642A /* NSObject+SPInvocationGrabbing.m */,
+			);
+			path = SPInvocationGrabbing;
+			sourceTree = "<group>";
+		};
+		ABA7FE242F4494FD0000642A /* SPMediaKeyTap */ = {
+			isa = PBXGroup;
+			children = (
+				ABA7FE212F4494FD0000642A /* SPInvocationGrabbing */,
+				ABA7FE222F4494FD0000642A /* SPMediaKeyTap.h */,
+				ABA7FE232F4494FD0000642A /* SPMediaKeyTap.m */,
+			);
+			path = SPMediaKeyTap;
 			sourceTree = "<group>";
 		};
 		F501B3AC15877062001C6158 /* ui */ = {
@@ -307,7 +372,7 @@
 				F5148AD81580E707002B3D61 /* extern */,
 				F5148AB11580E58D002B3D61 /* Frameworks */,
 				F5148AAF1580E58D002B3D61 /* Products */,
-				24544BA4F17D121B54ED9379 /* Pods */,
+				030B3033FE6F162F111D8A91 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -332,7 +397,7 @@
 				F5148B491580EE1F002B3D61 /* Carbon.framework */,
 				F5148AB21580E58D002B3D61 /* Cocoa.framework */,
 				F5148AB41580E58D002B3D61 /* Other Frameworks */,
-				20D2B03A41D0AEC7208214B3 /* libPods-diumoo.a */,
+				A59F272867389CDAD17E6CA1 /* libPods-diumoo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -382,6 +447,8 @@
 		F5148AD81580E707002B3D61 /* extern */ = {
 			isa = PBXGroup;
 			children = (
+				ABA7FE1E2F4494FD0000642A /* SMTabBar */,
+				ABA7FE242F4494FD0000642A /* SPMediaKeyTap */,
 				F5ECCBFE158CE39500512F6A /* PLTabPreference */,
 				F515C15B15B6F07500210826 /* StatusItem */,
 				F5D3630A15A1F0EF003A40B2 /* JUInspectorView */,
@@ -574,12 +641,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5148ACF1580E58E002B3D61 /* Build configuration list for PBXNativeTarget "diumoo" */;
 			buildPhases = (
-				36EC0B39C01231F7CEFCCA4D /* [CP] Check Pods Manifest.lock */,
+				8C4DA710AF180CAF059A579A /* [CP] Check Pods Manifest.lock */,
 				F5148AAA1580E58D002B3D61 /* Sources */,
 				F5148AAB1580E58D002B3D61 /* Frameworks */,
 				F5148AAC1580E58D002B3D61 /* Resources */,
-				17FE6B001584AD5900EA34EA /* ShellScript */,
-				AC53C1DCCFC993456635CD37 /* [CP] Copy Pods Resources */,
+				772C4D6A3AE9309936097609 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -596,8 +662,9 @@
 		F5148AA51580E58D002B3D61 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = DM;
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					F5148AAD1580E58D002B3D61 = {
 						DevelopmentTeam = BPRT8L8NAK;
@@ -650,38 +717,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		17FE6B001584AD5900EA34EA /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "version=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" $PRODUCT_SETTINGS_PATH`\nversion=`expr $version + 1`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $version\" $PRODUCT_SETTINGS_PATH";
-		};
-		36EC0B39C01231F7CEFCCA4D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-diumoo-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AC53C1DCCFC993456635CD37 /* [CP] Copy Pods Resources */ = {
+		772C4D6A3AE9309936097609 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -699,6 +735,28 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-diumoo/Pods-diumoo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8C4DA710AF180CAF059A579A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-diumoo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -711,6 +769,13 @@
 				FDE594871D17015400F0011E /* DMNotificationCenter.swift in Sources */,
 				FDFC972C1D16226A00F7D474 /* Dictionary+urlEncoding.swift in Sources */,
 				F5148ABF1580E58D002B3D61 /* main.m in Sources */,
+				ABA7FE252F4494FD0000642A /* NSDictionary+SMKeyValueObserving.m in Sources */,
+				ABA7FE262F4494FD0000642A /* NSObject+SPInvocationGrabbing.m in Sources */,
+				ABA7FE272F4494FD0000642A /* SMTabBarItem.m in Sources */,
+				ABA7FE282F4494FD0000642A /* SMTabBar.m in Sources */,
+				ABA7FE292F4494FD0000642A /* SPMediaKeyTap.m in Sources */,
+				ABA7FE2A2F4494FD0000642A /* SMTabBarButtonCell.m in Sources */,
+				ABA7FE2B2F4494FD0000642A /* SMBar.m in Sources */,
 				F5148AD41580E5F4002B3D61 /* DMAppDelegate.m in Sources */,
 				41BD4EB61FED50700028B8BC /* DockImageProvider.swift in Sources */,
 				F5148AD71580E6AD002B3D61 /* DMApp.m in Sources */,
@@ -836,6 +901,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -849,6 +915,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -856,8 +923,11 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = BPRT8L8NAK;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -880,6 +950,7 @@
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
 			name = Debug;
 		};
@@ -887,6 +958,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -900,6 +972,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -907,8 +980,11 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
 				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BPRT8L8NAK;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -923,21 +999,23 @@
 				PROVISIONING_PROFILE = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
 		F5148AD01580E58E002B3D61 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BE91A78563AA81EABA8B8D0E /* Pods-diumoo.debug.xcconfig */;
+			baseConfigurationReference = 0537EC2A6E69614A89C2C584 /* Pods-diumoo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = BPRT8L8NAK;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -952,8 +1030,11 @@
 				);
 				INFOPLIST_FILE = "diumoo/diumoo-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lxml2",
@@ -970,7 +1051,7 @@
 		};
 		F5148AD11580E58E002B3D61 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9EAD9E5D5CB65D7EDCE8478F /* Pods-diumoo.release.xcconfig */;
+			baseConfigurationReference = EAACB1F82587FEB568BEFB7C /* Pods-diumoo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -978,8 +1059,8 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = BPRT8L8NAK;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -994,8 +1075,11 @@
 				);
 				INFOPLIST_FILE = "diumoo/diumoo-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-lxml2",
