@@ -11,8 +11,6 @@
 #import "DMService.h"
 #import "DMPanelWindowController.h"
 
-#define UPDATE_URL @"http://channel.diumoo.net/channels/"
-
 #define kDMCollectChannel @"collect_channel"
 #define kDMUncollectChannel @"uncollect_channel"
 
@@ -80,18 +78,13 @@
 }
 
 - (void)updateChannelList {
-    // Get channels from NetEase Music fetcher instead of local plist
     DMPlaylistFetcher *fetcher = [DMPlaylistFetcher sharedController];
     NSArray *channels = [fetcher getNetEaseChannels];
 
     if (channels && [channels count] > 0) {
-        // Convert NetEase flat channel list to categorized format expected by buildMenuWithChannelListArray:
-        // Expected format: @[{@"cate": @"Category Name", @"channels": @[{@"id": @(1), @"name": @"Channel"}]}]
-
         NSMutableArray *channelList = [NSMutableArray array];
         NSMutableArray *netEaseChannels = [NSMutableArray array];
 
-        // Convert each NetEase channel to the expected format
         for (NSDictionary *channel in channels) {
             NSString *channelId = channel[@"channel_id"];
             NSString *name = channel[@"name"];
@@ -104,7 +97,6 @@
             }
         }
 
-        // Create a single category for all NetEase channels
         [channelList addObject:@{
             @"cate": @"热门榜单",
             @"channels": netEaseChannels
@@ -112,85 +104,9 @@
 
         NSLog(@"updateChannelList: Loaded %lu channels from NetEase Music", (unsigned long)[channels count]);
         [self updateMenuItemsWithPublicList:channelList andSuggestList:nil];
-
     } else {
-        // Fallback to local plist if NetEase fetcher not ready
-        NSLog(@"updateChannelList: NetEase fetcher not available, using fallback");
-        [self updateChannelListFromLocalPlist];
+        NSLog(@"updateChannelList: No channels available from NetEase Music");
     }
-}
-
-// New method: fallback to original plist-based loading
-- (void)updateChannelListFromLocalPlist {
-    NSString *libraryPath = [DMService pathToDataFileFolder];
-    NSString *defaultFilepath = [[NSBundle mainBundle] pathForResource:@"channels" ofType:@"plist"];
-    NSString *filepath = nil;
-    NSDictionary *channelDict = nil;
-
-    if (libraryPath) {
-        filepath = [libraryPath stringByAppendingPathComponent:@"channels.plist"];
-        channelDict = [NSDictionary dictionaryWithContentsOfFile:filepath];
-    }
-
-    if (channelDict == nil) {
-        channelDict = [NSDictionary dictionaryWithContentsOfFile:defaultFilepath];
-    }
-
-    NSArray *public_list = nil;
-    NSArray *suggest_list = nil;
-    NSArray *en_public_list = nil;
-
-
-    double timestamp = [[channelDict valueForKey:@"timestamp"] doubleValue];
-    if (([NSDate timeIntervalSinceReferenceDate] - timestamp) > 3600 * 24 * 3) {
-        // -------------------------获取新的列表--------------------------
-        NSURL *updateUrl = [NSURL URLWithString:UPDATE_URL];
-        NSURLRequest *urlrequest = [NSURLRequest requestWithURL:updateUrl
-                                                    cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                timeoutInterval:3.0];
-        NSURLResponse *response = NULL;
-        NSError *error = NULL;
-        NSData *data = [NSURLConnection sendSynchronousRequest:urlrequest
-                                             returningResponse:&response
-                                                         error:&error];
-
-
-        if (error == NULL) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-
-            if (error == NULL) {
-                public_list = [dict valueForKey:@"public"];
-                en_public_list = [dict valueForKey:@"en_public"];
-                suggest_list = [dict valueForKey:@"suggest"];
-
-                if (filepath && [public_list count] && [suggest_list count] && [en_public_list count]) {
-
-                    NSNumber *timestamp = @([NSDate timeIntervalSinceReferenceDate]);
-
-                    channelDict = @{
-                            @"public": public_list,
-                            @"en_public": en_public_list,
-                            @"suggest": suggest_list,
-                            @"timestamp": timestamp};
-
-                    [channelDict writeToFile:filepath atomically:YES];
-
-                }
-            }
-        }
-        //----------------------------------------------------------------------
-
-    }
-
-
-    public_list = [channelDict valueForKey:NSLocalizedString(@"LOCALIZED_PUBLIC_LIST_NAME", @"public")];
-    suggest_list = [channelDict valueForKey:@"suggest"];
-
-    if (public_list == nil) {
-        public_list = [channelDict valueForKey:@"public"];
-    }
-
-    [self updateMenuItemsWithPublicList:public_list andSuggestList:suggest_list];
 }
 
 - (void)updateMenuItemsWithPublicList:(NSArray *)publiclist andSuggestList:(NSArray *)suggestlist {
